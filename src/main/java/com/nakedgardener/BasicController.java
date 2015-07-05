@@ -13,6 +13,6 @@ public class BasicController {
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String basicPage(final ModelMap modelMap) {
         modelMap.put("someData", now().toString());
-        return "index";
+        return "home";
     }
 }
