@@ -11,10 +11,10 @@ public class NavigationItemFactory {
 
     public List<NavigationItem> create(String requestURI) {
         return asList(
-                navigationItem("/", "Home", requestURI),
-                navigationItem("/blog", "Blog", requestURI),
-                navigationItem("/curriculum-vitae", "Curriculum Vitae", requestURI),
-                navigationItem("/contact", "Contact", requestURI)
+            navigationItem("/", "Home", requestURI),
+            //navigationItem("/blog", "Blog", requestURI),
+            navigationItem("/curriculum-vitae", "Curriculum Vitae", requestURI),
+            navigationItem("/contact", "Contact", requestURI)
         );
     }
 

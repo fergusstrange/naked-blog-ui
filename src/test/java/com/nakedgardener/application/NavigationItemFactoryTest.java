@@ -14,7 +14,7 @@ public class NavigationItemFactoryTest {
     public void shouldReturnFiveNavigationItems() throws Exception {
         List<NavigationItem> navigationItems = new NavigationItemFactory().create("/nanana");
 
-        assertThat(navigationItems).hasSize(4);
+        assertThat(navigationItems).hasSize(3);
     }
 
     @Test
