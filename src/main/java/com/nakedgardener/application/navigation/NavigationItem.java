@@ -1,4 +1,4 @@
-package com.nakedgardener.application;
+package com.nakedgardener.application.navigation;
 
 public class NavigationItem {
 

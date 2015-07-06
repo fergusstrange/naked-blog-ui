@@ -6,6 +6,7 @@
     <title>{{pageTitle}}</title>
     <link rel="stylesheet" type="text/css" href="/resource/css/core.css">
     <link rel="stylesheet" type="text/css" href="/resource/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/bootstrap-theme.min.css">
 </head>
 <body>
     <div class="container">
@@ -15,7 +16,7 @@
                 <ul class="nav nav-tabs nav-justified">
                     {{#each navigationItems}}
                         {{#if active}}
-                            <li class="active"><a href="{{href}}">{{name}}</a></li>
+                            <li class="active"><a>{{name}}</a></li>
                         {{else}}
                             <li><a href="{{href}}">{{name}}</a></li>
                         {{/if}}

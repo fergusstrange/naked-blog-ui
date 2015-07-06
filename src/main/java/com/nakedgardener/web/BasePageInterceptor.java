@@ -1,6 +1,6 @@
 package com.nakedgardener.web;
 
-import com.nakedgardener.application.NavigationItemFactory;
+import com.nakedgardener.application.navigation.NavigationItemFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;

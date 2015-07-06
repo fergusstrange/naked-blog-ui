@@ -1,4 +1,4 @@
-package com.nakedgardener.application;
+package com.nakedgardener.application.navigation;
 
 import org.springframework.stereotype.Component;
 
@@ -12,8 +12,7 @@ public class NavigationItemFactory {
     public List<NavigationItem> create(String requestURI) {
         return asList(
                 navigationItem("/", "Home", requestURI),
-                navigationItem("/portfolio", "Portfolio", requestURI),
-                navigationItem("/testimonials", "Testimonials", requestURI),
+                navigationItem("/blog", "Blog", requestURI),
                 navigationItem("/curriculum-vitae", "Curriculum Vitae", requestURI),
                 navigationItem("/contact", "Contact", requestURI)
         );
