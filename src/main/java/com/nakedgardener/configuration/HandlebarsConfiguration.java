@@ -1,4 +1,4 @@
-package com.nakedgardener;
+package com.nakedgardener.configuration;
 
 import com.github.jknack.handlebars.springmvc.HandlebarsViewResolver;
 import org.springframework.context.annotation.Bean;

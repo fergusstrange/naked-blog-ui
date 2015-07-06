@@ -2,27 +2,35 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
-    <script type="text/javascript" src="/resource/core.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{pageTitle}}</title>
+    <link rel="stylesheet" type="text/css" href="/resource/css/core.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/bootstrap.min.css">
 </head>
 <body>
-    <header>
-        <div>
-            <ul>
-                <li>Home</li>
-                <li>Portfolio</li>
-                <li>Testimonials</li>
-                <li>Curriculum Vitae</li>
-                <li>Contact</li>
-            </ul>
+    <div class="container">
+        <div class="header">
+            <h1>The Naked Gardener</h1>
+            <nav>
+                <ul class="nav nav-tabs nav-justified">
+                    {{#each navigationItems}}
+                        {{#if active}}
+                            <li class="active"><a href="{{href}}">{{name}}</a></li>
+                        {{else}}
+                            <li><a href="{{href}}">{{name}}</a></li>
+                        {{/if}}
+                    {{/each}}
+                </ul>
+            </nav>
         </div>
-    </header>
-    <div>
-        {{#block "content"}}
-        {{/block}}
+        <div>
+            {{#block "content"}}
+            {{/block}}
+        </div>
+        <footer class="footer">
+            <div class="text-muted text-center">Copyright (c) {{pageYear}}</div>
+        </footer>
     </div>
-    <footer>
-        <div>2015</div>
-    </footer>
+    <script type="text/javascript" src="/resource/js/core.js"></script>
 </body>
 </html>
