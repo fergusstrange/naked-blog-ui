@@ -40,5 +40,5 @@ buildscript {
 }
 
 jar {
-    baseName = 'spring-boot-embryo'
+    baseName = 'naked-gardener'
 }
