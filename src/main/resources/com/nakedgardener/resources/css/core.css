@@ -1,8 +1,24 @@
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+.masttop {
+    min-height: 100%;
+    margin-bottom: -30px;
+}
+.masttop:after {
+  content: "";
+  display: block;
+}
+.footer, .masttop:after {
+  height: 30px;
+}
 .header {
     margin-top: 30px;
     margin-bottom: 30px;
 }
-footer {
-    margin-top: 30px;
-    margin-bottom: 10px;
+.content-wrapper {
+    margin-bottom: 30px;
 }

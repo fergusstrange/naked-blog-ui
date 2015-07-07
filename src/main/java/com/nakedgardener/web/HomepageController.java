@@ -9,6 +9,6 @@ public class HomepageController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String homepage() {
-        return "home";
+        return "services";
     }
 }

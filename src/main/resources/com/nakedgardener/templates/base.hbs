@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/resource/css/bootstrap-theme.min.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container masttop">
         <div class="header">
             <h1>The Naked Gardener</h1>
             <nav>
@@ -24,14 +24,14 @@
                 </ul>
             </nav>
         </div>
-        <div>
+        <div class="content-wrapper">
             {{#block "content"}}
             {{/block}}
         </div>
-        <footer class="footer">
-            <div class="text-muted text-center"><small>Copyright (c) {{pageYear}}</small></div>
-        </footer>
     </div>
+    <footer class="footer">
+        <div class="text-muted text-center"><small>Copyright (c) {{pageYear}}</small></div>
+    </footer>
     <script type="text/javascript" src="/resource/js/core.js"></script>
 </body>
 </html>
