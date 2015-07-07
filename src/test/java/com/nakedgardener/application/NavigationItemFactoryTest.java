@@ -19,15 +19,15 @@ public class NavigationItemFactoryTest {
 
     @Test
     public void shouldReturnActiveWhenCurrentPage() throws Exception {
-        List<NavigationItem> navigationItems = new NavigationItemFactory().create("/blog");
+        List<NavigationItem> navigationItems = new NavigationItemFactory().create("/contact");
 
-        assertThat(navigationItems.get(1).isActive()).isTrue();
+        assertThat(navigationItems.get(2).isActive()).isTrue();
     }
 
     @Test
     public void shouldReturnInactiveWhenNotCurrentPage() throws Exception {
         List<NavigationItem> navigationItems = new NavigationItemFactory().create("/");
 
-        assertThat(navigationItems.get(3).isActive()).isFalse();
+        assertThat(navigationItems.get(2).isActive()).isFalse();
     }
 }

@@ -3,6 +3,7 @@ package com.nakedgardener.application.contact;
 import com.nakedgardener.web.contact.ContactForm;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.validation.BindingResult;
@@ -13,8 +14,7 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ContactServiceTest {
@@ -22,7 +22,11 @@ public class ContactServiceTest {
     @Mock
     private BindingResult bindingResult;
 
-    private ContactService contactService = new ContactService();
+    @Mock
+    private ContactMailService contactMailService;
+
+    @InjectMocks
+    private ContactService contactService;
 
     @Test
     public void shouldReturnSuccessfulResult() throws Exception {
@@ -35,7 +39,7 @@ public class ContactServiceTest {
 
     @Test
     public void shouldReturnFailureResult() throws Exception {
-        given(bindingResult.hasFieldErrors()).willReturn(true);
+        givenThatFieldErrorsArePresent();
 
         ContactResult contactResult = contactService.processContactForm(contactForm(), bindingResult);
 
@@ -53,7 +57,7 @@ public class ContactServiceTest {
 
     @Test
     public void shouldHaveErrorsWhenBindingResultHasFieldErrors() throws Exception {
-        given(bindingResult.hasFieldErrors()).willReturn(true);
+        givenThatFieldErrorsArePresent();
 
         ContactResult contactResult = contactService.processContactForm(contactForm(), bindingResult);
 
@@ -62,22 +66,56 @@ public class ContactServiceTest {
 
     @Test
     public void shouldReturnTwoFieldErrors() throws Exception {
-        List<FieldError> fieldErrors = fieldErrors();
-        given(bindingResult.getFieldErrors()).willReturn(fieldErrors);
+        givenThatFieldErrorsArePresent();
 
         ContactResult contactResult = contactService.processContactForm(contactForm(), bindingResult);
 
-        assertThat(contactResult.getBindingErrors()).hasSize(2);
+        assertThat(contactResult.getErrors()).hasSize(2);
     }
 
     @Test
     public void shouldReturnAppropriateMessagesForValidationErrors() throws Exception {
-        List<FieldError> fieldErrors = fieldErrors();
-        given(bindingResult.getFieldErrors()).willReturn(fieldErrors);
+        givenThatFieldErrorsArePresent();
 
         ContactResult contactResult = contactService.processContactForm(contactForm(), bindingResult);
 
-        assertThat(contactResult.getBindingErrors()).contains("In your face.", "You gone did something wrong.");
+        assertThat(contactResult.getErrors()).contains("In your face.", "You gone did something wrong.");
+    }
+
+    @Test
+    public void shouldPassContactFormToEmailServiceWhenNoErrors() throws Exception {
+        ContactForm contactForm = contactForm();
+
+        contactService.processContactForm(contactForm, bindingResult);
+
+        verify(contactMailService).sendEmail(contactForm);
+    }
+
+    @Test
+    public void shouldNotPassContactFormToEmailServiceWhenErrors() throws Exception {
+        ContactForm contactForm = contactForm();
+        givenThatFieldErrorsArePresent();
+
+        contactService.processContactForm(contactForm, bindingResult);
+
+        verify(contactMailService, never()).sendEmail(contactForm);
+    }
+
+    @Test
+    public void shouldHandleMailServerExceptionAndReturnUnsuccessfulWithErrorMessage() throws Exception {
+        doThrow(new RuntimeException()).when(contactMailService).sendEmail(any(ContactForm.class));
+
+        ContactResult contactResult = contactService.processContactForm(contactForm(), bindingResult);
+
+        assertThat(contactResult.isHasErrors()).isTrue();
+        assertThat(contactResult.isSuccess()).isFalse();
+        assertThat(contactResult.getErrors()).containsOnly("Uh oh! Something went wrong, please try again.");
+    }
+
+    private void givenThatFieldErrorsArePresent() {
+        List<FieldError> fieldErrors = fieldErrors();
+        given(bindingResult.hasFieldErrors()).willReturn(true);
+        given(bindingResult.getFieldErrors()).willReturn(fieldErrors);
     }
 
     private List<FieldError> fieldErrors() {
