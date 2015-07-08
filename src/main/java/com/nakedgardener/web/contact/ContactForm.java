@@ -15,7 +15,7 @@ public class ContactForm {
     @NotEmpty(message = "Please provide a telephone number.")
     private String telephone;
 
-    @NotEmpty(message = "Please provide a contactMessage.")
+    @NotEmpty(message = "Please provide a message.")
     private String contactMessage;
 
     public String getName() {
