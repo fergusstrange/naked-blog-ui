@@ -21,6 +21,7 @@ gradle-app.setting
 # Icon must end with two \r
 Icon
 
+*.log
 
 # Thumbnails
 ._*
