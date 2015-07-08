@@ -30,12 +30,19 @@ public class ContactMailServiceTest {
         contactMailService.sendEmail(contactForm());
 
         assertThat(greenMail.getReceivedMessages().length).isEqualTo(3);
+        assertThat((String) greenMail.getReceivedMessages()[0].getContent())
+                .contains("Mr. Mistoffelees")
+                .contains("mr.mistoffelees@thenakedgardener.co.uk")
+                .contains("+0123456789")
+                .contains("Hello.");
     }
 
     private ContactForm contactForm() {
         ContactForm contactForm = new ContactForm();
+        contactForm.setName("Mr. Mistoffelees");
         contactForm.setEmail("mr.mistoffelees@thenakedgardener.co.uk");
-        contactForm.setMessage("Hello.");
+        contactForm.setTelephone("+0123456789");
+        contactForm.setContactMessage("Hello.");
         return contactForm;
     }
 }

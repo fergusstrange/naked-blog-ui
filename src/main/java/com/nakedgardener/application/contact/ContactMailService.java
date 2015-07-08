@@ -1,5 +1,6 @@
 package com.nakedgardener.application.contact;
 
+import com.github.jknack.handlebars.springmvc.HandlebarsViewResolver;
 import com.nakedgardener.web.contact.ContactForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,6 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 import javax.mail.internet.InternetAddress;
+import java.io.IOException;
 
 import static javax.mail.Message.RecipientType.TO;
 
@@ -17,19 +19,28 @@ public class ContactMailService {
     private String emailToAddress;
 
     private final JavaMailSender mailSender;
+    private final HandlebarsViewResolver handlebarsViewResolver;
 
     @Autowired
-    public ContactMailService(JavaMailSender mailSender) {
+    public ContactMailService(JavaMailSender mailSender, HandlebarsViewResolver handlebarsViewResolver) {
         this.mailSender = mailSender;
+        this.handlebarsViewResolver = handlebarsViewResolver;
     }
 
-    public void sendEmail(ContactForm contactForm) {
+    public void sendEmail(final ContactForm contactForm) {
         mailSender.send(mimeMessage -> {
             mimeMessage.setRecipient(TO, new InternetAddress(emailToAddress));
-            mimeMessage.setFrom(contactForm.getEmail());
+            mimeMessage.setFrom("gardener@thenakedgardener.co.uk");
             mimeMessage.setReplyTo(new InternetAddress[]{new InternetAddress(contactForm.getEmail())});
-            mimeMessage.setSubject("Someone has contacted the Naked Gardener");
-            mimeMessage.setText(contactForm.getMessage());
+            mimeMessage.setSubject("Someone has contacted The Naked Gardener");
+            mimeMessage.setText(contactFormEmailMessage(contactForm));
         });
+    }
+
+    private String contactFormEmailMessage(ContactForm contactForm) throws IOException {
+        return handlebarsViewResolver
+                .getHandlebars()
+                .compile("contactFormEmailMessage")
+                .apply(contactForm);
     }
 }

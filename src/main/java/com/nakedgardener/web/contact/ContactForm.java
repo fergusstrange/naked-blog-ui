@@ -15,38 +15,38 @@ public class ContactForm {
     @NotEmpty(message = "Please provide a telephone number.")
     private String telephone;
 
-    @NotEmpty(message = "Please provide a message.")
-    private String message;
+    @NotEmpty(message = "Please provide a contactMessage.")
+    private String contactMessage;
 
     public String getName() {
         return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public String getMessage() {
-        return message;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTelephone() {
+        return telephone;
     }
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public String getContactMessage() {
+        return contactMessage;
+    }
+
+    public void setContactMessage(String contactMessage) {
+        this.contactMessage = contactMessage;
     }
 }
