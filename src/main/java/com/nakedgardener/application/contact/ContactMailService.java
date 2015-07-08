@@ -30,7 +30,7 @@ public class ContactMailService {
     public void sendEmail(final ContactForm contactForm) {
         mailSender.send(mimeMessage -> {
             mimeMessage.setRecipient(TO, new InternetAddress(emailToAddress));
-            mimeMessage.setFrom("gardener@thenakedgardener.co.uk");
+            mimeMessage.setFrom(new InternetAddress("contact@thenakedgardener.co.uk", "The Naked Gardener"));
             mimeMessage.setReplyTo(new InternetAddress[]{new InternetAddress(contactForm.getEmail())});
             mimeMessage.setSubject("Someone has contacted The Naked Gardener");
             mimeMessage.setText(contactFormEmailMessage(contactForm));
