@@ -15,6 +15,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter:1.2.4.RELEASE'
     compile 'org.springframework.boot:spring-boot-actuator:1.2.4.RELEASE'
     compile 'org.springframework:spring-context-support:4.1.6.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-security:1.2.4.RELEASE'
 
     compile 'com.github.jknack:handlebars-springmvc:2.2.2'
     compile 'com.github.jknack:handlebars:2.2.2'
