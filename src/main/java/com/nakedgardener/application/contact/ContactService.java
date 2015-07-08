@@ -16,7 +16,8 @@ import static java.util.stream.Collectors.toList;
 @Component
 public class ContactService {
 
-    public static final String MAIL_ERROR_MESSAGE = "Uh oh! Something went wrong, please try again.";
+    private static final String MAIL_ERROR_MESSAGE = "Uh oh! Something went wrong, please try again.";
+
     private final ContactMailService contactMailService;
 
     @Autowired
