@@ -45,4 +45,5 @@ buildscript {
 
 jar {
     baseName = 'naked-gardener'
+    version = null
 }
