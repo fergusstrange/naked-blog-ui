@@ -4,9 +4,14 @@
 html, body {
   height: 100%;
 }
+img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
 .masttop {
-    min-height: 100%;
-    margin-bottom: -30px;
+  min-height: 100%;
+  margin-bottom: -30px;
 }
 .masttop:after {
   content: "";
@@ -16,9 +21,9 @@ html, body {
   height: 30px;
 }
 .header {
-    margin-top: 30px;
-    margin-bottom: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 .content-wrapper {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
