@@ -22,6 +22,7 @@ gradle-app.setting
 Icon
 
 *.log
+logs/
 
 # Thumbnails
 ._*
