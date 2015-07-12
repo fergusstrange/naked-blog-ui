@@ -13,16 +13,8 @@ public class Application {
     public static void main(String... args) {
         new SpringApplicationBuilder()
                 .sources(Application.class)
-                .listeners(new ApplicationPidFileWriter(pidLocation()))
+                .listeners(new ApplicationPidFileWriter("naked-gardener.pid"))
                 .build()
                 .run(args);
-    }
-
-    private static String pidLocation() {
-        String jarPath = Application.class.getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .getPath();
-        return String.format("%s/naked-gardener.pid", jarPath);
     }
 }
