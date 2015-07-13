@@ -13,7 +13,7 @@ public class Application {
     public static void main(String... args) {
         new SpringApplicationBuilder()
                 .sources(Application.class)
-                .listeners(new ApplicationPidFileWriter("naked-gardener.pid"))
+                .listeners(new ApplicationPidFileWriter())
                 .build()
                 .run(args);
     }
