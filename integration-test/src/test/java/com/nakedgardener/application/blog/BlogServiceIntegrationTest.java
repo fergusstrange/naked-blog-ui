@@ -3,7 +3,7 @@ package com.nakedgardener.application.blog;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.google.common.io.Resources;
 import com.nakedgardener.Application;
-import com.nakedgardener.application.blog.domain.BlogPosts;
+import com.nakedgardener.application.blog.dto.BlogPostsResult;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
-public class BlogServiceTest {
+public class BlogServiceIntegrationTest {
 
     @Rule
     public WireMockRule wireMockRule = new WireMockRule(3456);
@@ -38,7 +38,7 @@ public class BlogServiceTest {
                                 .withBody(restResponse())
                 ));
 
-        BlogPosts blogPosts = blogService.blogPostsByIndex(0);
+        BlogPostsResult blogPosts = blogService.blogPostsByIndex(0);
 
         assertThat(blogPosts).isNotNull();
         assertThat(blogPosts.getBlogPosts()).hasSize(5);
