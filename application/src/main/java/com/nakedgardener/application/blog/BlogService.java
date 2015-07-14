@@ -1,5 +1,6 @@
 package com.nakedgardener.application.blog;
 
+import com.nakedgardener.application.blog.domain.BlogPosts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;

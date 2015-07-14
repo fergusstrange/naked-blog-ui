@@ -1,4 +1,4 @@
-package com.nakedgardener.application.blog;
+package com.nakedgardener.application.blog.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

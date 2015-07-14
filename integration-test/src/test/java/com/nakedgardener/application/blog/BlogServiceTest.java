@@ -4,6 +4,7 @@ import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.google.common.io.Resources;
 import com.nakedgardener.Application;
+import com.nakedgardener.application.blog.domain.BlogPosts;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
