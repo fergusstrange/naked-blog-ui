@@ -19,7 +19,7 @@ public class BlogService {
     }
 
     public BlogPosts blogPostsByIndex(int fromIndex) {
-        URI url = blogURLFactory.blogPostsURL(fromIndex, fromIndex + 5);
+        URI url = blogURLFactory.blogPostsURL(fromIndex, fromIndex + 4);
         return restTemplate.getForObject(url, BlogPosts.class);
     }
 }

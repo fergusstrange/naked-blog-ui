@@ -21,8 +21,8 @@ public class BlogURLFactory {
     public URI blogPostsURL(int fromIndex, int toIndex) {
         return fromHttpUrl(baseBlogURL)
                 .path("/blog-posts")
-                .queryParam("fromIndex", fromIndex)
-                .queryParam("toIndex", toIndex)
+                .queryParam("indexFrom", fromIndex)
+                .queryParam("indexTo", toIndex)
                 .build()
                 .toUri();
     }
