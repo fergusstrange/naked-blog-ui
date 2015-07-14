@@ -16,7 +16,6 @@ dependencies {
     testCompile 'org.easytesting:fest-assert:1.4'
     testCompile 'org.mockito:mockito-all:1.10.19'
     testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
-    testCompile 'com.icegreen:greenmail:1.4.1'
     testCompile 'com.google.guava:guava:18.0'
 }
 
