@@ -1,1 +1,5 @@
 rootProject.name = 'naked-gardener'
+
+include 'application'
+include 'integration-test'
+

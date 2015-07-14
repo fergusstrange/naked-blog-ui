@@ -1,49 +1,16 @@
 version = '1.0'
 
-apply plugin: 'java'
-apply plugin: 'spring-boot'
+subprojects {
+    apply plugin: 'java'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories{
+        mavenCentral()
+    }
+}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
-}
-
-dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-web:1.2.4.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter:1.2.4.RELEASE'
-    compile 'org.springframework.boot:spring-boot-actuator:1.2.4.RELEASE'
-    compile 'org.springframework:spring-context-support:4.1.6.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-security:1.2.4.RELEASE'
-
-    compile 'com.github.jknack:handlebars-springmvc:2.2.2'
-    compile 'com.github.jknack:handlebars:2.2.2'
-    compile 'javax.mail:javax.mail-api:1.5.4'
-    compile 'com.sun.mail:javax.mail:1.5.4'
-
-    testCompile 'junit:junit:4.11'
-    testCompile 'org.easytesting:fest-assert:1.4'
-    testCompile 'org.mockito:mockito-all:1.10.19'
-    testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
-    testCompile 'com.icegreen:greenmail:1.4.1'
-    testCompile 'com.google.guava:guava:18.0'
-}
-
-repositories {
-    mavenCentral()
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.4.RELEASE")
-    }
-}
-
-jar {
-    baseName = 'naked-gardener'
-    version = null
 }
