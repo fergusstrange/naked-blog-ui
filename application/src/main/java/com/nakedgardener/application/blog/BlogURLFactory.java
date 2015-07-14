@@ -18,9 +18,9 @@ public class BlogURLFactory {
         this.baseBlogURL = baseBlogURL;
     }
 
-    public URI blogPostsURL(int fromIndex, int toIndex) {
+    public URI mostRecentBlogPostsURL(int fromIndex, int toIndex) {
         return fromHttpUrl(baseBlogURL)
-                .path("/blog-posts")
+                .path("/blog-post/_recent")
                 .queryParam("indexFrom", fromIndex)
                 .queryParam("indexTo", toIndex)
                 .build()

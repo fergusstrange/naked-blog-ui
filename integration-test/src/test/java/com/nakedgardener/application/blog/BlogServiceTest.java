@@ -1,6 +1,5 @@
 package com.nakedgardener.application.blog;
 
-import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.google.common.io.Resources;
 import com.nakedgardener.Application;
@@ -32,16 +31,12 @@ public class BlogServiceTest {
     @Test
     public void shouldReturnBogPosts() throws Exception {
         stubFor(get(
-                urlEqualTo("/blog-posts?indexFrom=0&indexTo=4"))
+                urlEqualTo("/blog-post/_recent?indexFrom=0&indexTo=4"))
                 .willReturn(aResponse()
                                 .withStatus(200)
                                 .withHeader("Content-Type", "application/json")
                                 .withBody(restResponse())
                 ));
-
-        WireMock.listAllStubMappings().getMappings().stream().forEach(stubMapping -> {
-            System.out.println(stubMapping.getRequest().getUrl());
-        });
 
         BlogPosts blogPosts = blogService.blogPostsByIndex(0);
 
