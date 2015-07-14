@@ -12,6 +12,6 @@ public class BlogURLFactoryTest {
     public void should() throws Exception {
         URI uri = new BlogURLFactory("http://localhost:12345").blogPostsURL(0, 10);
 
-        assertThat(uri.toString()).isEqualTo("http://localhost:12345/blog-posts?fromIndex=0&toIndex=10");
+        assertThat(uri.toString()).isEqualTo("http://localhost:12345/blog-posts?ndexFrom=0&indexTo=10");
     }
 }
