@@ -7,6 +7,8 @@ import java.util.List;
 
 public class BlogPostsResult {
 
+    private static final String noResultsMessage = "Like The Naked Gardener, the blog appears to be bare!";
+
     private final List<BlogPost> blogPosts;
     private final boolean noResults;
 
@@ -29,6 +31,10 @@ public class BlogPostsResult {
 
     public boolean isNoResults() {
         return noResults;
+    }
+
+    public String getNoResultsMessage() {
+        return noResultsMessage;
     }
 
     public static class BlogPostsResultBuilder {

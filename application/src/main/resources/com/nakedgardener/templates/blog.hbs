@@ -1,4 +1,13 @@
 {{#partial "content"}}
-    <div>Blog will go here.</div>
+    <h1>Blog</h1>
+    <div>
+        {{#unless blogPostsResult.noResults}}
+            {{#each blogPostsResult.blogPosts}}
+                <div class="blogPostPreview">{{title}}</div>
+            {{/each}}
+        {{else}}
+            {{blogPostResult.noResultsMessage}}
+        {{/unless}}
+    </div>
 {{/partial}}
 {{> base}}
