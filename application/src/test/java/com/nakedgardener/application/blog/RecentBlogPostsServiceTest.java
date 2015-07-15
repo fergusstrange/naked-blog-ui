@@ -1,8 +1,10 @@
 package com.nakedgardener.application.blog;
 
 import com.nakedgardener.application.blog.domain.BlogPosts;
-import com.nakedgardener.application.blog.dto.BlogPostPreview;
-import com.nakedgardener.application.blog.dto.BlogPostsResult;
+import com.nakedgardener.application.blog.recentblogposts.RecentBlogPostsDTOConverter;
+import com.nakedgardener.application.blog.recentblogposts.RecentBlogPostsService;
+import com.nakedgardener.application.blog.recentblogposts.dto.BlogPostPreview;
+import com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogPostsResult;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -16,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 
-import static com.nakedgardener.application.blog.dto.BlogPostsResult.blogPostsResultsBuilder;
+import static com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogPostsResult.blogPostsResultsBuilder;
 import static java.util.Arrays.asList;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -27,7 +29,7 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.OK;
 
 @RunWith(MockitoJUnitRunner.class)
-public class RecentBlogServiceTest {
+public class RecentBlogPostsServiceTest {
 
     @Mock
     private BlogURLFactory blogURLFactory;
@@ -36,7 +38,7 @@ public class RecentBlogServiceTest {
     private RestTemplate restTemplate;
 
     @Mock
-    private BlogPostDTOConverter blogPostDTOConverter;
+    private RecentBlogPostsDTOConverter recentBlogPostsDTOConverter;
 
     @Mock
     private Logger logger;
@@ -45,13 +47,13 @@ public class RecentBlogServiceTest {
     private ResponseEntity<BlogPosts> blogPostsResponseEntity;
 
     @InjectMocks
-    private RecentBlogService recentBlogService;
+    private RecentBlogPostsService recentBlogPostsService;
 
     @Test
     public void shouldTryToGetNPlusFourResults() throws Exception {
         givenRestServiceCalledAndEntityReturnedWithStatus(OK);
 
-        recentBlogService.blogPostsByIndex(0);
+        recentBlogPostsService.blogPostsByIndex(0);
 
         verify(blogURLFactory).mostRecentBlogPostsURL(0, 4);
     }
@@ -60,21 +62,21 @@ public class RecentBlogServiceTest {
     public void shouldReturnEmptyResultWhenNot200Response() throws Exception {
         givenRestServiceCalledAndEntityReturnedWithStatus(INTERNAL_SERVER_ERROR);
 
-        BlogPostsResult blogPostsResult = recentBlogService.blogPostsByIndex(0);
+        RecentBlogPostsResult recentBlogPostsResult = recentBlogPostsService.blogPostsByIndex(0);
 
-        assertThat(blogPostsResult.getBlogPostPreviews()).hasSize(0);
-        assertThat(blogPostsResult.isNoResults()).isTrue();
+        assertThat(recentBlogPostsResult.getBlogPostPreviews()).hasSize(0);
+        assertThat(recentBlogPostsResult.isNoResults()).isTrue();
     }
 
     @Test
     public void shouldReturnConvertedObjectFromRestCall() throws Exception {
         givenRestServiceCalledAndEntityReturnedWithStatus(OK);
-        given(blogPostDTOConverter.convert(any(BlogPosts.class))).willReturn(blogPostsResult());
+        given(recentBlogPostsDTOConverter.convert(any(BlogPosts.class))).willReturn(blogPostsResult());
 
-        BlogPostsResult blogPostsResult = recentBlogService.blogPostsByIndex(0);
+        RecentBlogPostsResult recentBlogPostsResult = recentBlogPostsService.blogPostsByIndex(0);
 
-        assertThat(blogPostsResult.isNoResults()).isFalse();
-        assertThat(blogPostsResult.getBlogPostPreviews()).hasSize(3);
+        assertThat(recentBlogPostsResult.isNoResults()).isFalse();
+        assertThat(recentBlogPostsResult.getBlogPostPreviews()).hasSize(3);
     }
 
     @Test
@@ -83,16 +85,16 @@ public class RecentBlogServiceTest {
         given(restTemplate.getForEntity(any(URI.class), eq(BlogPosts.class)))
                 .willThrow(restClientException);
 
-        BlogPostsResult blogPostsResult = recentBlogService.blogPostsByIndex(0);
+        RecentBlogPostsResult recentBlogPostsResult = recentBlogPostsService.blogPostsByIndex(0);
 
-        assertThat(blogPostsResult.isNoResults()).isTrue();
-        assertThat(blogPostsResult.getBlogPostPreviews()).hasSize(0);
-        assertThat(blogPostsResult.getNoResultsMessage()).isEqualTo("Like The Naked Gardener, the blog appears to be bare!");
+        assertThat(recentBlogPostsResult.isNoResults()).isTrue();
+        assertThat(recentBlogPostsResult.getBlogPostPreviews()).hasSize(0);
+        assertThat(recentBlogPostsResult.getNoResultsMessage()).isEqualTo("Like The Naked Gardener, the blog appears to be bare!");
 
         verify(logger).error("Error retrieving blog messages.", restClientException);
     }
 
-    private BlogPostsResult blogPostsResult() {
+    private RecentBlogPostsResult blogPostsResult() {
         return blogPostsResultsBuilder()
                 .blogPostPreviews(asList(emptyPreview(), emptyPreview(), emptyPreview()))
                 .build();

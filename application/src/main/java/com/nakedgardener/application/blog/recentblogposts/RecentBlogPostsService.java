@@ -1,7 +1,8 @@
-package com.nakedgardener.application.blog;
+package com.nakedgardener.application.blog.recentblogposts;
 
+import com.nakedgardener.application.blog.BlogURLFactory;
 import com.nakedgardener.application.blog.domain.BlogPosts;
-import com.nakedgardener.application.blog.dto.BlogPostsResult;
+import com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogPostsResult;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,29 +12,29 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 
-import static com.nakedgardener.application.blog.dto.BlogPostsResult.emptyBlogPostResult;
+import static com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogPostsResult.emptyBlogPostResult;
 
 @Component
-public class RecentBlogService {
+public class RecentBlogPostsService {
 
     private final RestTemplate restTemplate;
     private final BlogURLFactory blogURLFactory;
-    private final BlogPostDTOConverter blogPostDTOConverter;
+    private final RecentBlogPostsDTOConverter recentBlogPostsDTOConverter;
     private final Logger applicationErrorLog;
 
     @Autowired
-    public RecentBlogService(RestTemplate restTemplate, BlogURLFactory blogURLFactory, BlogPostDTOConverter blogPostDTOConverter, Logger applicationErrorLog) {
+    public RecentBlogPostsService(RestTemplate restTemplate, BlogURLFactory blogURLFactory, RecentBlogPostsDTOConverter recentBlogPostsDTOConverter, Logger applicationErrorLog) {
         this.restTemplate = restTemplate;
         this.blogURLFactory = blogURLFactory;
-        this.blogPostDTOConverter = blogPostDTOConverter;
+        this.recentBlogPostsDTOConverter = recentBlogPostsDTOConverter;
         this.applicationErrorLog = applicationErrorLog;
     }
 
-    public BlogPostsResult blogPostsByIndex(int fromIndex) {
+    public RecentBlogPostsResult blogPostsByIndex(int fromIndex) {
         try {
             ResponseEntity<BlogPosts> response = restTemplate.getForEntity(url(fromIndex), BlogPosts.class);
             return response.getStatusCode().is2xxSuccessful() ?
-                    blogPostDTOConverter.convert(response.getBody()) :
+                    recentBlogPostsDTOConverter.convert(response.getBody()) :
                     emptyBlogPostResult();
         }
         catch (RestClientException e) {

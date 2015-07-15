@@ -1,4 +1,4 @@
-package com.nakedgardener.application.blog.dto;
+package com.nakedgardener.application.blog.recentblogposts.dto;
 
 import java.util.Date;
 

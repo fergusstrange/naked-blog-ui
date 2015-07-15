@@ -3,7 +3,8 @@ package com.nakedgardener.application.blog;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.google.common.io.Resources;
 import com.nakedgardener.Application;
-import com.nakedgardener.application.blog.dto.BlogPostsResult;
+import com.nakedgardener.application.blog.recentblogposts.RecentBlogPostsService;
+import com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogPostsResult;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,16 +21,16 @@ import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
-public class RecentBlogServiceIntegrationTest {
+public class RecentBlogPostsServiceIntegrationTest {
 
     @Rule
     public WireMockRule wireMockRule = new WireMockRule(3456);
 
     @Autowired
-    private RecentBlogService recentBlogService;
+    private RecentBlogPostsService recentBlogPostsService;
 
     @Test
-    public void shouldReturnBogPosts() throws Exception {
+    public void shouldReturnBlogPosts() throws Exception {
         stubFor(get(
                 urlEqualTo("/blog-post/_recent?indexFrom=0&indexTo=4"))
                 .willReturn(aResponse()
@@ -38,7 +39,7 @@ public class RecentBlogServiceIntegrationTest {
                                 .withBody(restResponse())
                 ));
 
-        BlogPostsResult blogPosts = recentBlogService.blogPostsByIndex(0);
+        RecentBlogPostsResult blogPosts = recentBlogPostsService.blogPostsByIndex(0);
 
         assertThat(blogPosts).isNotNull();
         assertThat(blogPosts.getBlogPostPreviews()).hasSize(5);
