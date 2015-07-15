@@ -1,8 +1,7 @@
-package com.nakedgardener.application.blog;
+package com.nakedgardener.application.blog.recentblogposts;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nakedgardener.application.blog.domain.BlogPosts;
-import com.nakedgardener.application.blog.recentblogposts.RecentBlogPostsDTOConverter;
 import com.nakedgardener.application.blog.recentblogposts.dto.BlogPostPreview;
 import com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogPostsResult;
 import org.junit.Test;

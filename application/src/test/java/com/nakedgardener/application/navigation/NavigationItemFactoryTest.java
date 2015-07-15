@@ -1,7 +1,5 @@
-package com.nakedgardener.application;
+package com.nakedgardener.application.navigation;
 
-import com.nakedgardener.application.navigation.NavigationItem;
-import com.nakedgardener.application.navigation.NavigationItemFactory;
 import org.junit.Test;
 
 import java.util.List;
