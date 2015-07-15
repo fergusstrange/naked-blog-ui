@@ -1,6 +1,6 @@
 package com.nakedgardener.web;
 
-import org.apache.commons.logging.Log;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
 import org.springframework.stereotype.Controller;
@@ -17,10 +17,10 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
     private static final String FOUR_OH_FOUR_ERROR_MSG = "Like the Naked Gardner's clothes, you appear to be lost.";
     private static final String DEFAULT_ERROR_MSG = "Something went wrong. Please try again.";
 
-    private final Log applicationErrorLog;
+    private final Logger applicationErrorLog;
 
     @Autowired
-    public ErrorController(Log applicationErrorLog) {
+    public ErrorController(Logger applicationErrorLog) {
         this.applicationErrorLog = applicationErrorLog;
     }
 

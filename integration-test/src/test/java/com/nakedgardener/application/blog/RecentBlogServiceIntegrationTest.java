@@ -20,13 +20,13 @@ import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
-public class BlogServiceIntegrationTest {
+public class RecentBlogServiceIntegrationTest {
 
     @Rule
     public WireMockRule wireMockRule = new WireMockRule(3456);
 
     @Autowired
-    private BlogService blogService;
+    private RecentBlogService recentBlogService;
 
     @Test
     public void shouldReturnBogPosts() throws Exception {
@@ -38,7 +38,7 @@ public class BlogServiceIntegrationTest {
                                 .withBody(restResponse())
                 ));
 
-        BlogPostsResult blogPosts = blogService.blogPostsByIndex(0);
+        BlogPostsResult blogPosts = recentBlogService.blogPostsByIndex(0);
 
         assertThat(blogPosts).isNotNull();
         assertThat(blogPosts.getBlogPosts()).hasSize(5);

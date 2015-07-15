@@ -1,7 +1,7 @@
 package com.nakedgardener.configuration;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class LoggingConfiguration {
 
     @Bean
-    public Log applicationErrorLog() {
-        return LogFactory.getLog("naked-gardener-error.log");
+    public Logger applicationErrorLog() {
+        return LoggerFactory.getLogger("com.nakedgardener.logging.error");
     }
 }

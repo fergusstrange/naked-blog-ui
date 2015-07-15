@@ -26,7 +26,7 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.OK;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BlogServiceTest {
+public class RecentBlogServiceTest {
 
     @Mock
     private BlogURLFactory blogURLFactory;
@@ -41,13 +41,13 @@ public class BlogServiceTest {
     private ResponseEntity<BlogPosts> blogPostsResponseEntity;
 
     @InjectMocks
-    private BlogService blogService;
+    private RecentBlogService recentBlogService;
 
     @Test
     public void shouldTryToGetNPlusFourResults() throws Exception {
         givenRestServiceCalledAndEntityReturnedWithStatus(OK);
 
-        blogService.blogPostsByIndex(0);
+        recentBlogService.blogPostsByIndex(0);
 
         verify(blogURLFactory).mostRecentBlogPostsURL(0, 4);
     }
@@ -56,7 +56,7 @@ public class BlogServiceTest {
     public void shouldReturnEmptyResultWhenNot200Response() throws Exception {
         givenRestServiceCalledAndEntityReturnedWithStatus(INTERNAL_SERVER_ERROR);
 
-        BlogPostsResult blogPostsResult = blogService.blogPostsByIndex(0);
+        BlogPostsResult blogPostsResult = recentBlogService.blogPostsByIndex(0);
 
         assertThat(blogPostsResult.getBlogPosts()).hasSize(0);
         assertThat(blogPostsResult.isNoResults()).isTrue();
@@ -67,7 +67,7 @@ public class BlogServiceTest {
         givenRestServiceCalledAndEntityReturnedWithStatus(OK);
         given(blogPostDTOConverter.convert(any(BlogPosts.class))).willReturn(blogPostsResult());
 
-        BlogPostsResult blogPostsResult = blogService.blogPostsByIndex(0);
+        BlogPostsResult blogPostsResult = recentBlogService.blogPostsByIndex(0);
 
         assertThat(blogPostsResult.isNoResults()).isFalse();
         assertThat(blogPostsResult.getBlogPosts()).hasSize(3);
@@ -78,11 +78,11 @@ public class BlogServiceTest {
         given(restTemplate.getForEntity(any(URI.class), eq(BlogPosts.class)))
                 .willThrow(new RestClientException("Uh oh!"));
 
-        BlogPostsResult blogPostsResult = blogService.blogPostsByIndex(0);
+        BlogPostsResult blogPostsResult = recentBlogService.blogPostsByIndex(0);
 
         assertThat(blogPostsResult.isNoResults()).isTrue();
         assertThat(blogPostsResult.getBlogPosts()).hasSize(0);
-
+        assertThat(blogPostsResult.getNoResultsMessage()).isEqualTo("Like The Naked Gardener, the blog appears to be bare!");
     }
 
     private BlogPostsResult blogPostsResult() {

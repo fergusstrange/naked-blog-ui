@@ -2,7 +2,7 @@ package com.nakedgardener.application.blog;
 
 import com.nakedgardener.application.blog.domain.BlogPosts;
 import com.nakedgardener.application.blog.dto.BlogPostsResult;
-import org.apache.commons.logging.Log;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -14,15 +14,15 @@ import java.net.URI;
 import static com.nakedgardener.application.blog.dto.BlogPostsResult.emptyBlogPostResult;
 
 @Component
-public class BlogService {
+public class RecentBlogService {
 
     private final RestTemplate restTemplate;
     private final BlogURLFactory blogURLFactory;
     private final BlogPostDTOConverter blogPostDTOConverter;
-    private final Log applicationErrorLog;
+    private final Logger applicationErrorLog;
 
     @Autowired
-    public BlogService(RestTemplate restTemplate, BlogURLFactory blogURLFactory, BlogPostDTOConverter blogPostDTOConverter, Log applicationErrorLog) {
+    public RecentBlogService(RestTemplate restTemplate, BlogURLFactory blogURLFactory, BlogPostDTOConverter blogPostDTOConverter, Logger applicationErrorLog) {
         this.restTemplate = restTemplate;
         this.blogURLFactory = blogURLFactory;
         this.blogPostDTOConverter = blogPostDTOConverter;

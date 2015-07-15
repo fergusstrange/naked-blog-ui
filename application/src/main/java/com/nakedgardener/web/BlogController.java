@@ -1,6 +1,6 @@
 package com.nakedgardener.web;
 
-import com.nakedgardener.application.blog.BlogService;
+import com.nakedgardener.application.blog.RecentBlogService;
 import com.nakedgardener.application.blog.dto.BlogPostsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,16 +13,16 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Controller
 public class BlogController {
 
-    private final BlogService blogService;
+    private final RecentBlogService recentBlogService;
 
     @Autowired
-    public BlogController(BlogService blogService) {
-        this.blogService = blogService;
+    public BlogController(RecentBlogService recentBlogService) {
+        this.recentBlogService = recentBlogService;
     }
 
     @RequestMapping(method = GET, value = "/blog")
     public String blog(final ModelMap model, @RequestParam(defaultValue = "1") Integer page) {
-        BlogPostsResult blogPostsResult = blogService.blogPostsByIndex(0);
+        BlogPostsResult blogPostsResult = recentBlogService.blogPostsByIndex(0);
         model.addAttribute("blogPostsResult", blogPostsResult);
         return "blog";
     }
