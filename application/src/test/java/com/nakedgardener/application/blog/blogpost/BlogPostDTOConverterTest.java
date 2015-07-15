@@ -2,7 +2,7 @@ package com.nakedgardener.application.blog.blogpost;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nakedgardener.application.blog.blogpost.dto.BlogPostResult;
-import com.nakedgardener.application.blog.domain.BlogPosts;
+import com.nakedgardener.application.blog.domain.BlogPost;
 import org.junit.Test;
 
 import static com.google.common.io.Resources.getResource;
@@ -15,12 +15,12 @@ public class BlogPostDTOConverterTest {
 
     @Test
     public void shouldConvertBlogPostToBlogPostResult() throws Exception {
-        BlogPostResult blogPostResult = blogPostDTOConverter.convert(blogPosts());
+        BlogPostResult blogPostResult = blogPostDTOConverter.convert(blogPost());
 
         assertThat(blogPostResult).isNotNull();
     }
 
-    private BlogPosts blogPosts() throws Exception {
-        return objectMapper.readValue(getResource("com/nakedgardener/application/blog/blog-posts_rest_response.json"), BlogPosts.class);
+    private BlogPost blogPost() throws Exception {
+        return objectMapper.readValue(getResource("com/nakedgardener/application/blog/blog-post_rest_response.json"), BlogPost.class);
     }
 }

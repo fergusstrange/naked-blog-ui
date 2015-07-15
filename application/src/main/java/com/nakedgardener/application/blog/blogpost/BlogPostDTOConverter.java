@@ -1,15 +1,15 @@
 package com.nakedgardener.application.blog.blogpost;
 
 import com.nakedgardener.application.blog.blogpost.dto.BlogPostResult;
-import com.nakedgardener.application.blog.domain.BlogPosts;
+import com.nakedgardener.application.blog.domain.BlogPost;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BlogPostDTOConverter implements Converter<BlogPosts, BlogPostResult> {
+public class BlogPostDTOConverter implements Converter<BlogPost, BlogPostResult> {
 
     @Override
-    public BlogPostResult convert(BlogPosts source) {
+    public BlogPostResult convert(BlogPost source) {
         return new BlogPostResult();
     }
 }

@@ -26,4 +26,12 @@ public class BlogURLFactory {
                 .build()
                 .toUri();
     }
+
+    public URI blogPostURL(String blogPostSlug) {
+        return fromHttpUrl(baseBlogURL)
+                .path("/blog-post/{blogPostSlug}")
+                .pathSegment(blogPostSlug)
+                .build()
+                .toUri();
+    }
 }
