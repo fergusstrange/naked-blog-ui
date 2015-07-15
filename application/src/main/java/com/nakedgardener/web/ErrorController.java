@@ -26,7 +26,8 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
 
     @RequestMapping("/error")
     public String errorWithoutCode(final ModelMap modelMap, HttpServletRequest request) {
-        applicationErrorLog.error("", exception(request));
+        Throwable exception = exception(request);
+        applicationErrorLog.error(exception.getMessage(), exception);
 
         Integer errorCode = errorCode(request);
 
