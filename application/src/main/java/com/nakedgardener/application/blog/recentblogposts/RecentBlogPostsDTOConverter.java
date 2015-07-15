@@ -1,7 +1,7 @@
 package com.nakedgardener.application.blog.recentblogposts;
 
+import com.nakedgardener.application.blog.domain.BlogPost;
 import com.nakedgardener.application.blog.domain.BlogPosts;
-import com.nakedgardener.application.blog.domain.BlogPosts.BlogPost;
 import com.nakedgardener.application.blog.recentblogposts.dto.BlogPostPreview;
 import com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogPostsResult;
 import org.springframework.core.convert.converter.Converter;
