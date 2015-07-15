@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
@@ -36,6 +37,9 @@ public class RecentBlogServiceTest {
 
     @Mock
     private BlogPostDTOConverter blogPostDTOConverter;
+
+    @Mock
+    private Logger logger;
 
     @Mock
     private ResponseEntity<BlogPosts> blogPostsResponseEntity;
@@ -75,14 +79,17 @@ public class RecentBlogServiceTest {
 
     @Test
     public void shouldHandleRestClientExceptionAndReturnEmptyResult() throws Exception {
+        RestClientException restClientException = new RestClientException("Uh oh!");
         given(restTemplate.getForEntity(any(URI.class), eq(BlogPosts.class)))
-                .willThrow(new RestClientException("Uh oh!"));
+                .willThrow(restClientException);
 
         BlogPostsResult blogPostsResult = recentBlogService.blogPostsByIndex(0);
 
         assertThat(blogPostsResult.isNoResults()).isTrue();
         assertThat(blogPostsResult.getBlogPosts()).hasSize(0);
         assertThat(blogPostsResult.getNoResultsMessage()).isEqualTo("Like The Naked Gardener, the blog appears to be bare!");
+
+        verify(logger).error("Error retrieving blog messages.", restClientException);
     }
 
     private BlogPostsResult blogPostsResult() {
