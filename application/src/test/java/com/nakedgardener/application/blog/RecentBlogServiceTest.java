@@ -1,6 +1,7 @@
 package com.nakedgardener.application.blog;
 
 import com.nakedgardener.application.blog.domain.BlogPosts;
+import com.nakedgardener.application.blog.dto.BlogPostPreview;
 import com.nakedgardener.application.blog.dto.BlogPostsResult;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 
-import static com.nakedgardener.application.blog.domain.BlogPosts.BlogPost;
 import static com.nakedgardener.application.blog.dto.BlogPostsResult.blogPostsResultsBuilder;
 import static java.util.Arrays.asList;
 import static org.fest.assertions.Assertions.assertThat;
@@ -62,7 +62,7 @@ public class RecentBlogServiceTest {
 
         BlogPostsResult blogPostsResult = recentBlogService.blogPostsByIndex(0);
 
-        assertThat(blogPostsResult.getBlogPosts()).hasSize(0);
+        assertThat(blogPostsResult.getBlogPostPreviews()).hasSize(0);
         assertThat(blogPostsResult.isNoResults()).isTrue();
     }
 
@@ -74,7 +74,7 @@ public class RecentBlogServiceTest {
         BlogPostsResult blogPostsResult = recentBlogService.blogPostsByIndex(0);
 
         assertThat(blogPostsResult.isNoResults()).isFalse();
-        assertThat(blogPostsResult.getBlogPosts()).hasSize(3);
+        assertThat(blogPostsResult.getBlogPostPreviews()).hasSize(3);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class RecentBlogServiceTest {
         BlogPostsResult blogPostsResult = recentBlogService.blogPostsByIndex(0);
 
         assertThat(blogPostsResult.isNoResults()).isTrue();
-        assertThat(blogPostsResult.getBlogPosts()).hasSize(0);
+        assertThat(blogPostsResult.getBlogPostPreviews()).hasSize(0);
         assertThat(blogPostsResult.getNoResultsMessage()).isEqualTo("Like The Naked Gardener, the blog appears to be bare!");
 
         verify(logger).error("Error retrieving blog messages.", restClientException);
@@ -94,8 +94,12 @@ public class RecentBlogServiceTest {
 
     private BlogPostsResult blogPostsResult() {
         return blogPostsResultsBuilder()
-                .blogPosts(asList(new BlogPost(), new BlogPost(), new BlogPost()))
+                .blogPostPreviews(asList(emptyPreview(), emptyPreview(), emptyPreview()))
                 .build();
+    }
+
+    private BlogPostPreview emptyPreview() {
+        return BlogPostPreview.blogPostPreviewBuilder().build();
     }
 
     private void givenRestServiceCalledAndEntityReturnedWithStatus(HttpStatus httpStatus) {

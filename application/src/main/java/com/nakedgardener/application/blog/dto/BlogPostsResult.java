@@ -1,7 +1,5 @@
 package com.nakedgardener.application.blog.dto;
 
-import com.nakedgardener.application.blog.domain.BlogPosts.BlogPost;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +7,10 @@ public class BlogPostsResult {
 
     private static final String noResultsMessage = "Like The Naked Gardener, the blog appears to be bare!";
 
-    private final List<BlogPost> blogPosts;
+    private final List<BlogPostPreview> blogPostPreviews;
 
     private BlogPostsResult(BlogPostsResultBuilder builder){
-        this.blogPosts = builder.blogPosts;
+        this.blogPostPreviews = builder.blogPostPreviews;
     }
 
     public static BlogPostsResultBuilder blogPostsResultsBuilder() {
@@ -23,12 +21,12 @@ public class BlogPostsResult {
         return blogPostsResultsBuilder().build();
     }
 
-    public List<BlogPost> getBlogPosts() {
-        return blogPosts;
+    public List<BlogPostPreview> getBlogPostPreviews() {
+        return blogPostPreviews;
     }
 
     public boolean isNoResults() {
-        return blogPosts.isEmpty();
+        return blogPostPreviews.isEmpty();
     }
 
     public String getNoResultsMessage() {
@@ -37,10 +35,10 @@ public class BlogPostsResult {
 
     public static class BlogPostsResultBuilder {
 
-        private List<BlogPost> blogPosts = new ArrayList<>();
+        private List<BlogPostPreview> blogPostPreviews = new ArrayList<>();
 
-        public BlogPostsResultBuilder blogPosts(List<BlogPost> blogPosts) {
-            this.blogPosts.addAll(blogPosts);
+        public BlogPostsResultBuilder blogPostPreviews(List<BlogPostPreview> blogPostPreviews) {
+            this.blogPostPreviews.addAll(blogPostPreviews);
             return this;
         }
 

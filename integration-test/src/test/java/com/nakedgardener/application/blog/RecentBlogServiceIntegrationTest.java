@@ -41,7 +41,7 @@ public class RecentBlogServiceIntegrationTest {
         BlogPostsResult blogPosts = recentBlogService.blogPostsByIndex(0);
 
         assertThat(blogPosts).isNotNull();
-        assertThat(blogPosts.getBlogPosts()).hasSize(5);
+        assertThat(blogPosts.getBlogPostPreviews()).hasSize(5);
     }
 
     private String restResponse() throws IOException {
