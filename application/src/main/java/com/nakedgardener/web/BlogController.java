@@ -21,7 +21,7 @@ public class BlogController {
     }
 
     @RequestMapping(method = GET, value = "/blog")
-    public String blog(final ModelMap model, @RequestParam("1") Integer page) {
+    public String blog(final ModelMap model, @RequestParam(defaultValue = "1") Integer page) {
         BlogPostsResult blogPostsResult = blogService.blogPostsByIndex(0);
         model.addAttribute("blogPostsResult", blogPostsResult);
         return "blog";
