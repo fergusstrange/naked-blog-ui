@@ -29,7 +29,7 @@ public class BlogURLFactory {
 
     public URI blogPostURL(String blogPostSlug) {
         return fromHttpUrl(baseBlogURL)
-                .path("/blog-post/{blogPostSlug}")
+                .path("/blog-post")
                 .pathSegment(blogPostSlug)
                 .build()
                 .toUri();
