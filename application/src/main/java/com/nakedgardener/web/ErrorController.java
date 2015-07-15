@@ -40,7 +40,6 @@ public class ErrorController implements org.springframework.boot.autoconfigure.w
     }
 
 
-
     private Integer errorCode(HttpServletRequest request) {
         return (Integer) request.getAttribute(ERROR_STATUS_CODE_ATTRIBUTE);
     }
