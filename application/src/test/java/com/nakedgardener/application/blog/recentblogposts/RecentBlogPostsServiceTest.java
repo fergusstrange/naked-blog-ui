@@ -54,7 +54,7 @@ public class RecentBlogPostsServiceTest {
 
         recentBlogPostsService.blogPostsByIndex(0);
 
-        verify(blogURLFactory).mostRecentBlogPostsURL(0, 4);
+        verify(blogURLFactory).mostRecentBlogPostsURL(0);
     }
 
     @Test
@@ -105,7 +105,7 @@ public class RecentBlogPostsServiceTest {
 
     private void givenRestServiceCalledAndEntityReturnedWithStatus(HttpStatus httpStatus) {
         URI testURI = URI.create("/test");
-        given(blogURLFactory.mostRecentBlogPostsURL(0, 4)).willReturn(testURI);
+        given(blogURLFactory.mostRecentBlogPostsURL(0)).willReturn(testURI);
         given(restTemplate.getForEntity(testURI, BlogPosts.class)).willReturn(blogPostsResponseEntity);
         given(blogPostsResponseEntity.getStatusCode()).willReturn(httpStatus);
         given(blogPostsResponseEntity.getBody()).willReturn(new BlogPosts());

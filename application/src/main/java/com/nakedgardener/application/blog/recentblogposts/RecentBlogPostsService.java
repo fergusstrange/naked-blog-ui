@@ -23,7 +23,8 @@ public class RecentBlogPostsService {
     private final Logger applicationErrorLog;
 
     @Autowired
-    public RecentBlogPostsService(RestTemplate restTemplate, BlogURLFactory blogURLFactory, RecentBlogPostsDTOConverter recentBlogPostsDTOConverter, Logger applicationErrorLog) {
+    public RecentBlogPostsService(RestTemplate restTemplate, BlogURLFactory blogURLFactory,
+                                  RecentBlogPostsDTOConverter recentBlogPostsDTOConverter, Logger applicationErrorLog) {
         this.restTemplate = restTemplate;
         this.blogURLFactory = blogURLFactory;
         this.recentBlogPostsDTOConverter = recentBlogPostsDTOConverter;
@@ -44,6 +45,6 @@ public class RecentBlogPostsService {
     }
 
     private URI url(int fromIndex) {
-        return blogURLFactory.mostRecentBlogPostsURL(fromIndex, fromIndex + 4);
+        return blogURLFactory.mostRecentBlogPostsURL(fromIndex);
     }
 }

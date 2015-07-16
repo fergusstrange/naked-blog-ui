@@ -12,17 +12,20 @@ import static org.springframework.web.util.UriComponentsBuilder.fromHttpUrl;
 public class BlogURLFactory {
 
     private final String baseBlogURL;
+    private final int blogChunkSize;
 
     @Autowired
-    public BlogURLFactory(@Value("${blog.base.url:http://localhost:8888}") String baseBlogURL) {
+    public BlogURLFactory(@Value("${blog.base.url:http://localhost:8888}") String baseBlogURL,
+                          @Value("${blog.chunk.size:5}") int blogChunkSize) {
         this.baseBlogURL = baseBlogURL;
+        this.blogChunkSize = blogChunkSize;
     }
 
-    public URI mostRecentBlogPostsURL(int fromIndex, int toIndex) {
+    public URI mostRecentBlogPostsURL(int fromIndex) {
         return fromHttpUrl(baseBlogURL)
                 .path("/blog-post/_recent")
                 .queryParam("indexFrom", fromIndex)
-                .queryParam("indexTo", toIndex)
+                .queryParam("indexTo", fromIndex + (blogChunkSize - 1))
                 .build()
                 .toUri();
     }
