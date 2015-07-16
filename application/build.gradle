@@ -9,6 +9,7 @@ dependencies {
 
     compile 'com.github.jknack:handlebars-springmvc:2.2.2'
     compile 'com.github.jknack:handlebars:2.2.2'
+
     compile 'javax.mail:javax.mail-api:1.5.4'
     compile 'com.sun.mail:javax.mail:1.5.4'
 
