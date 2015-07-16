@@ -4,22 +4,26 @@ import java.util.Date;
 
 public class BlogPostResult {
 
+    private static final String postNotExistsMessage = "Sorry, this post doesn't exist.";
+
     private final Date postDate;
     private final String title;
     private final String post;
+    private final boolean postExists;
 
     private BlogPostResult(BlogPostResultBuilder builder) {
         this.postDate = builder.postDate;
         this.title = builder.title;
         this.post = builder.post;
+        this.postExists = builder.postExists;
     }
 
     public static BlogPostResultBuilder blogPostResultBuilder() {
-        return new BlogPostResultBuilder();
+        return new BlogPostResultBuilder().withDefaults();
     }
 
     public static BlogPostResult emptyBlogPostResult() {
-        return blogPostResultBuilder().build();
+        return blogPostResultBuilder().postExists(false).build();
     }
 
     public Date getPostDate() {
@@ -34,11 +38,24 @@ public class BlogPostResult {
         return post;
     }
 
+    public boolean isPostExists() {
+        return postExists;
+    }
+
+    public String getPostNotExistsMessage() {
+        return postNotExistsMessage;
+    }
+
     public static class BlogPostResultBuilder {
 
         private Date postDate;
         private String title;
         private String post;
+        private boolean postExists;
+
+        private BlogPostResultBuilder withDefaults() {
+            return postExists(true);
+        }
 
         public BlogPostResultBuilder postDate(Date postDate) {
             this.postDate = postDate;
@@ -52,6 +69,11 @@ public class BlogPostResult {
 
         public BlogPostResultBuilder post(String post) {
             this.post = post;
+            return this;
+        }
+
+        public BlogPostResultBuilder postExists(boolean postExists) {
+            this.postExists = postExists;
             return this;
         }
 

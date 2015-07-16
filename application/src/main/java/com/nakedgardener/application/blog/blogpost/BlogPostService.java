@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -30,10 +31,16 @@ public class BlogPostService {
     }
 
     public BlogPostResult blogPostByBlogPostSlug(String blogPostSlug) {
-        URI blogPostURL = blogURLFactory.blogPostURL(blogPostSlug);
-        ResponseEntity<BlogPost> blogPostResponseEntity = restTemplate.getForEntity(blogPostURL, BlogPost.class);
-        return blogPostResponseEntity.getStatusCode().is2xxSuccessful() ?
-                blogPostDTOConverter.convert(blogPostResponseEntity.getBody()) :
-                emptyBlogPostResult();
+        try {
+            URI blogPostURL = blogURLFactory.blogPostURL(blogPostSlug);
+            ResponseEntity<BlogPost> blogPostResponseEntity = restTemplate.getForEntity(blogPostURL, BlogPost.class);
+            return blogPostResponseEntity.getStatusCode().is2xxSuccessful() ?
+                    blogPostDTOConverter.convert(blogPostResponseEntity.getBody()) :
+                    emptyBlogPostResult();
+        }
+        catch(RestClientException e) {
+            applicationErrorLog.error(e.getMessage(), e);
+            return emptyBlogPostResult();
+        }
     }
 }
