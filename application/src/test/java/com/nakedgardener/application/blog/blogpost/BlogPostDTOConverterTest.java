@@ -18,6 +18,8 @@ public class BlogPostDTOConverterTest {
         BlogPostResult blogPostResult = blogPostDTOConverter.convert(blogPost());
 
         assertThat(blogPostResult).isNotNull();
+        assertThat(blogPostResult.getTitle()).isEqualTo("A Test Blog");
+        assertThat(blogPostResult.getPost()).isEqualTo("Some content in the blog!");
     }
 
     private BlogPost blogPost() throws Exception {
