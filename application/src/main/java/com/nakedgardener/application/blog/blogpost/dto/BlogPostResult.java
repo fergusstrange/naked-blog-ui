@@ -1,12 +1,12 @@
 package com.nakedgardener.application.blog.blogpost.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class BlogPostResult {
 
     private static final String postNotExistsMessage = "Sorry, this post doesn't exist.";
 
-    private final Date postDate;
+    private final LocalDateTime postDate;
     private final String title;
     private final String post;
     private final boolean postExists;
@@ -26,7 +26,7 @@ public class BlogPostResult {
         return blogPostResultBuilder().postExists(false).build();
     }
 
-    public Date getPostDate() {
+    public LocalDateTime getPostDate() {
         return postDate;
     }
 
@@ -48,7 +48,7 @@ public class BlogPostResult {
 
     public static class BlogPostResultBuilder {
 
-        private Date postDate;
+        private LocalDateTime postDate;
         private String title;
         private String post;
         private boolean postExists;
@@ -57,7 +57,7 @@ public class BlogPostResult {
             return postExists(true);
         }
 
-        public BlogPostResultBuilder postDate(Date postDate) {
+        public BlogPostResultBuilder postDate(LocalDateTime postDate) {
             this.postDate = postDate;
             return this;
         }

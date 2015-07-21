@@ -3,7 +3,7 @@ package com.nakedgardener.application.blog.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BlogPost {
@@ -12,7 +12,7 @@ public class BlogPost {
     private String id;
 
     @JsonProperty
-    private Date postDate;
+    private LocalDateTime postDate;
 
     @JsonProperty
     private String title;
@@ -24,7 +24,7 @@ public class BlogPost {
         return id;
     }
 
-    public Date getPostDate() {
+    public LocalDateTime getPostDate() {
         return postDate;
     }
 

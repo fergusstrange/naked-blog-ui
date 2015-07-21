@@ -1,10 +1,10 @@
 package com.nakedgardener.application.blog.recentblogposts.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class BlogPostPreview {
 
-    private final Date postDate;
+    private final LocalDateTime postDate;
     private final String title;
     private final String postSnippet;
 
@@ -18,7 +18,7 @@ public class BlogPostPreview {
         return new BlogPostPreviewBuilder();
     }
 
-    public Date getPostDate() {
+    public LocalDateTime getPostDate() {
         return postDate;
     }
 
@@ -32,11 +32,11 @@ public class BlogPostPreview {
 
     public static class BlogPostPreviewBuilder {
 
-        private Date postDate;
+        private LocalDateTime postDate;
         private String title;
         private String postSnippet;
 
-        public BlogPostPreviewBuilder postDate(Date postDate) {
+        public BlogPostPreviewBuilder postDate(LocalDateTime postDate) {
             this.postDate = postDate;
             return this;
         }

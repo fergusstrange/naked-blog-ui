@@ -23,6 +23,7 @@ public class BlogPostDTOConverterTest {
     }
 
     private BlogPost blogPost() throws Exception {
+        objectMapper.findAndRegisterModules();
         return objectMapper.readValue(getResource("com/nakedgardener/application/blog/blog-post_rest_response.json"), BlogPost.class);
     }
 }
