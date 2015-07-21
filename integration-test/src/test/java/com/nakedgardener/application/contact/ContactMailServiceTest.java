@@ -14,7 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)public class ContactMailServiceTest {
+@SpringApplicationConfiguration(classes = Application.class)
+public class ContactMailServiceTest {
 
     @Rule
     public final GreenMailRule greenMail = new GreenMailRule(ServerSetupTest.ALL);
