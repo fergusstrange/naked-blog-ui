@@ -4,8 +4,11 @@
         {{#if recentBlogPostsResult.noResults}}
             <div>{{recentBlogPostsResult.noResultsMessage}}</div>
         {{else}}
-            {{#each recentBlogPostsResult.blogPosts}}
-                <div class="blogPostPreview">{{title}}</div>
+            {{#each recentBlogPostsResult.blogPostPreviews}}
+                <div class="blogPostPreview">
+                    <h3>{{title}}</h3>
+                    <div><p>{{postSnippet}}</p></div>
+                </div>
             {{/each}}
         {{/if}}
     </div>
