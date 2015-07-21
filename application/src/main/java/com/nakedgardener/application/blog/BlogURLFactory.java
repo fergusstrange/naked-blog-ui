@@ -21,18 +21,18 @@ public class BlogURLFactory {
         this.blogChunkSize = blogChunkSize;
     }
 
-    public URI mostRecentBlogPostsURL(int fromIndex) {
+    public URI mostRecentBlogPostsURL(int page) {
         return fromHttpUrl(baseBlogURL)
                 .path("/blog-post/_recent")
-                .queryParam("indexFrom", fromIndex)
-                .queryParam("indexTo", fromIndex + (blogChunkSize - 1))
+                .queryParam("page", page)
+                .queryParam("pageSize", blogChunkSize)
                 .build()
                 .toUri();
     }
 
     public URI blogPostURL(String blogPostSlug) {
         return fromHttpUrl(baseBlogURL)
-                .path("/blog-post")
+                .path("/blog-post/_blogPostSlug/")
                 .pathSegment(blogPostSlug)
                 .build()
                 .toUri();

@@ -32,7 +32,7 @@ public class RecentBlogPostsServiceIntegrationTest {
     @Test
     public void shouldReturnBlogPosts() throws Exception {
         stubFor(get(
-                urlEqualTo("/blog-post/_recent?indexFrom=0&indexTo=4"))
+                urlEqualTo("/blog-post/_recent?page=0&pageSize=5"))
                 .willReturn(aResponse()
                                 .withStatus(200)
                                 .withHeader("Content-Type", "application/json")

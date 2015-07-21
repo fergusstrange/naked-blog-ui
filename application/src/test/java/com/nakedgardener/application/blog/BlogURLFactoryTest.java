@@ -14,13 +14,13 @@ public class BlogURLFactoryTest {
     public void shouldReturnRecentBlogPostsURLWithQueryParametersAdded() throws Exception {
         URI uri = blogURLFactory.mostRecentBlogPostsURL(0);
 
-        assertThat(uri.toString()).isEqualTo("http://localhost:12345/blog-post/_recent?indexFrom=0&indexTo=4");
+        assertThat(uri.toString()).isEqualTo("http://localhost:12345/blog-post/_recent?page=0&pageSize=5");
     }
 
     @Test
     public void shouldReturnBlogPostURLWithSlugAppended() throws Exception {
         URI uri = blogURLFactory.blogPostURL("some-post-about-nudity");
 
-        assertThat(uri.toString()).isEqualTo("http://localhost:12345/blog-post/some-post-about-nudity");
+        assertThat(uri.toString()).isEqualTo("http://localhost:12345/blog-post/_blogPostSlug/some-post-about-nudity");
     }
 }
