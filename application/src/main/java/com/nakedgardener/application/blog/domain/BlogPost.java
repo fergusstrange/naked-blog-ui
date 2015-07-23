@@ -20,6 +20,9 @@ public class BlogPost {
     @JsonProperty
     private String post;
 
+    @JsonProperty
+    private String blogPostSlug;
+
     public String getId() {
         return id;
     }
@@ -34,5 +37,9 @@ public class BlogPost {
 
     public String getPost() {
         return post;
+    }
+
+    public String getBlogPostSlug() {
+        return blogPostSlug;
     }
 }
