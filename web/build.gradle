@@ -1,0 +1,21 @@
+apply plugin: 'spring-boot'
+
+dependencies {
+    compile project(':application')
+
+    compile 'org.springframework.boot:spring-boot-starter-security:1.2.4.RELEASE'
+}
+
+jar {
+    baseName = 'naked-gardener'
+    version = null
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.4.RELEASE")
+    }
+}
