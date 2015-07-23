@@ -2,8 +2,7 @@ package com.nakedgardener.application.contact;
 
 import com.icegreen.greenmail.junit.GreenMailRule;
 import com.icegreen.greenmail.util.ServerSetupTest;
-import com.nakedgardener.Application;
-import com.nakedgardener.web.contact.ContactForm;
+import com.nakedgardener.IntegrationTestApplication;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = IntegrationTestApplication.class)
 public class ContactMailServiceTest {
 
     @Rule
@@ -44,5 +43,8 @@ public class ContactMailServiceTest {
         contactForm.setTelephone("+0123456789");
         contactForm.setContactMessage("Hello.");
         return contactForm;
+    }
+
+    private class IntegrationTestApplication {
     }
 }

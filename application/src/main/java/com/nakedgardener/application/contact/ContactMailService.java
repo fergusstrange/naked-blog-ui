@@ -1,7 +1,6 @@
 package com.nakedgardener.application.contact;
 
 import com.github.jknack.handlebars.springmvc.HandlebarsViewResolver;
-import com.nakedgardener.web.contact.ContactForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;

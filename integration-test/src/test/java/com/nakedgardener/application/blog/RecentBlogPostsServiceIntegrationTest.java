@@ -2,7 +2,7 @@ package com.nakedgardener.application.blog;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.google.common.io.Resources;
-import com.nakedgardener.Application;
+import com.nakedgardener.IntegrationTestApplication;
 import com.nakedgardener.application.blog.recentblogposts.RecentBlogPostsService;
 import com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogPostsResult;
 import org.junit.Rule;
@@ -20,7 +20,7 @@ import static java.nio.charset.Charset.defaultCharset;
 import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = IntegrationTestApplication.class)
 public class RecentBlogPostsServiceIntegrationTest {
 
     @Rule

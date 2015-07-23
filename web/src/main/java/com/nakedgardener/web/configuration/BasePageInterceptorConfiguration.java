@@ -1,4 +1,4 @@
-package com.nakedgardener.configuration;
+package com.nakedgardener.web.configuration;
 
 import com.nakedgardener.web.BasePageInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;

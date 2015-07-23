@@ -1,5 +1,6 @@
 package com.nakedgardener.web.contact;
 
+import com.nakedgardener.application.contact.ContactForm;
 import com.nakedgardener.application.contact.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

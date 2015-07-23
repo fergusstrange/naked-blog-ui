@@ -1,4 +1,4 @@
-package com.nakedgardener.configuration;
+package com.nakedgardener.application.configuration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

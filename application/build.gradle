@@ -1,11 +1,8 @@
-apply plugin: 'spring-boot'
-
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web:1.2.4.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter:1.2.4.RELEASE'
     compile 'org.springframework.boot:spring-boot-actuator:1.2.4.RELEASE'
     compile 'org.springframework:spring-context-support:4.1.6.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-security:1.2.4.RELEASE'
 
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.5.4'
 
@@ -20,18 +17,4 @@ dependencies {
     testCompile 'org.mockito:mockito-all:1.10.19'
     testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
     testCompile 'com.google.guava:guava:18.0'
-}
-
-jar {
-    baseName = 'naked-gardener'
-    version = null
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.4.RELEASE")
-    }
 }

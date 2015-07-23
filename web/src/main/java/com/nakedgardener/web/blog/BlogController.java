@@ -18,18 +18,16 @@ public class BlogController {
 
     private final RecentBlogPostsService recentBlogPostsService;
     private final BlogPostService blogPostService;
-    private final BlogPageIndexFactory blogPageIndexFactory;
 
     @Autowired
-    public BlogController(RecentBlogPostsService recentBlogPostsService, BlogPostService blogPostService, BlogPageIndexFactory blogPageIndexFactory) {
+    public BlogController(RecentBlogPostsService recentBlogPostsService, BlogPostService blogPostService) {
         this.recentBlogPostsService = recentBlogPostsService;
         this.blogPostService = blogPostService;
-        this.blogPageIndexFactory = blogPageIndexFactory;
     }
 
     @RequestMapping(method = GET, value = "/blog")
-    public String blog(final ModelMap model, @RequestParam(defaultValue = "1") Integer page) {
-        RecentBlogPostsResult recentBlogPostsResult = recentBlogPostsService.blogPostsByIndex(indexFromPage(page));
+    public String blog(final ModelMap model, @RequestParam(defaultValue = "0") Integer page) {
+        RecentBlogPostsResult recentBlogPostsResult = recentBlogPostsService.blogPostsByIndex(page);
         model.addAttribute("recentBlogPostsResult", recentBlogPostsResult);
         return "blog";
     }
@@ -39,9 +37,5 @@ public class BlogController {
         BlogPostResult blogPostResult = blogPostService.blogPostByBlogPostSlug(blogPostSlug);
         model.addAttribute("blogPostResult", blogPostResult);
         return "blogPost";
-    }
-
-    private int indexFromPage(Integer page) {
-        return blogPageIndexFactory.indexFromPage(page);
     }
 }

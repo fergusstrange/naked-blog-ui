@@ -1,4 +1,4 @@
-package com.nakedgardener.configuration;
+package com.nakedgardener.application.configuration;
 
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import org.springframework.context.annotation.Bean;

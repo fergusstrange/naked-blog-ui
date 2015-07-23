@@ -1,4 +1,4 @@
-package com.nakedgardener.configuration;
+package com.nakedgardener.web.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

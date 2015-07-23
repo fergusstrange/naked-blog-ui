@@ -1,6 +1,5 @@
 package com.nakedgardener.application.contact;
 
-import com.nakedgardener.web.contact.ContactForm;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
