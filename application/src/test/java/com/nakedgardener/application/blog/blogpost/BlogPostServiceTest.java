@@ -1,6 +1,6 @@
 package com.nakedgardener.application.blog.blogpost;
 
-import com.nakedgardener.application.blog.BlogURLFactory;
+import com.nakedgardener.application.blog.BlogRestServiceURLFactory;
 import com.nakedgardener.application.blog.blogpost.dto.BlogPostResult;
 import com.nakedgardener.application.blog.domain.BlogPost;
 import org.junit.Test;
@@ -30,7 +30,7 @@ public class BlogPostServiceTest {
     @Mock
     private Logger applicationErrorLog;
     @Mock
-    private BlogURLFactory blogURLFactory;
+    private BlogRestServiceURLFactory blogRestServiceURLFactory;
     @Mock
     private RestTemplate restTemplate;
     @Mock

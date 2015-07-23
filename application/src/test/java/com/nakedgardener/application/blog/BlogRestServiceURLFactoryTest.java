@@ -6,20 +6,20 @@ import java.net.URI;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class BlogURLFactoryTest {
+public class BlogRestServiceURLFactoryTest {
 
-    private BlogURLFactory blogURLFactory = new BlogURLFactory("http://localhost:12345", 5);
+    private BlogRestServiceURLFactory blogRestServiceURLFactory = new BlogRestServiceURLFactory("http://localhost:12345", 5);
 
     @Test
     public void shouldReturnRecentBlogPostsURLWithQueryParametersAdded() throws Exception {
-        URI uri = blogURLFactory.mostRecentBlogPostsURL(0);
+        URI uri = blogRestServiceURLFactory.mostRecentBlogPostsURL(0);
 
         assertThat(uri.toString()).isEqualTo("http://localhost:12345/blog-post/_recent?page=0&pageSize=5");
     }
 
     @Test
     public void shouldReturnBlogPostURLWithSlugAppended() throws Exception {
-        URI uri = blogURLFactory.blogPostURL("some-post-about-nudity");
+        URI uri = blogRestServiceURLFactory.blogPostURL("some-post-about-nudity");
 
         assertThat(uri.toString()).isEqualTo("http://localhost:12345/blog-post/_blogPostSlug/some-post-about-nudity");
     }

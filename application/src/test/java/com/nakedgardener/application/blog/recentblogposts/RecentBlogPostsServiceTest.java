@@ -1,6 +1,6 @@
 package com.nakedgardener.application.blog.recentblogposts;
 
-import com.nakedgardener.application.blog.BlogURLFactory;
+import com.nakedgardener.application.blog.BlogRestServiceURLFactory;
 import com.nakedgardener.application.blog.domain.BlogPosts;
 import com.nakedgardener.application.blog.recentblogposts.dto.BlogPostPreview;
 import com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogPostsResult;
@@ -31,7 +31,7 @@ import static org.springframework.http.HttpStatus.OK;
 public class RecentBlogPostsServiceTest {
 
     @Mock
-    private BlogURLFactory blogURLFactory;
+    private BlogRestServiceURLFactory blogRestServiceURLFactory;
 
     @Mock
     private RestTemplate restTemplate;
@@ -54,7 +54,7 @@ public class RecentBlogPostsServiceTest {
 
         recentBlogPostsService.blogPostsByIndex(0);
 
-        verify(blogURLFactory).mostRecentBlogPostsURL(0);
+        verify(blogRestServiceURLFactory).mostRecentBlogPostsURL(0);
     }
 
     @Test
@@ -105,7 +105,7 @@ public class RecentBlogPostsServiceTest {
 
     private void givenRestServiceCalledAndEntityReturnedWithStatus(HttpStatus httpStatus) {
         URI testURI = URI.create("/test");
-        given(blogURLFactory.mostRecentBlogPostsURL(0)).willReturn(testURI);
+        given(blogRestServiceURLFactory.mostRecentBlogPostsURL(0)).willReturn(testURI);
         given(restTemplate.getForEntity(testURI, BlogPosts.class)).willReturn(blogPostsResponseEntity);
         given(blogPostsResponseEntity.getStatusCode()).willReturn(httpStatus);
         given(blogPostsResponseEntity.getBody()).willReturn(new BlogPosts());

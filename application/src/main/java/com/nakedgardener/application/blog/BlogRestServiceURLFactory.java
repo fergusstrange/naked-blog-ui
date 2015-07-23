@@ -9,14 +9,14 @@ import java.net.URI;
 import static org.springframework.web.util.UriComponentsBuilder.fromHttpUrl;
 
 @Component
-public class BlogURLFactory {
+public class BlogRestServiceURLFactory {
 
     private final String baseBlogURL;
     private final int blogChunkSize;
 
     @Autowired
-    public BlogURLFactory(@Value("${blog.base.url:http://localhost:8888}") String baseBlogURL,
-                          @Value("${blog.chunk.size:5}") int blogChunkSize) {
+    public BlogRestServiceURLFactory(@Value("${blog.base.url:http://localhost:8888}") String baseBlogURL,
+                                     @Value("${blog.chunk.size:5}") int blogChunkSize) {
         this.baseBlogURL = baseBlogURL;
         this.blogChunkSize = blogChunkSize;
     }

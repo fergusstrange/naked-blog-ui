@@ -1,6 +1,6 @@
 package com.nakedgardener.application.blog.recentblogposts;
 
-import com.nakedgardener.application.blog.BlogURLFactory;
+import com.nakedgardener.application.blog.BlogRestServiceURLFactory;
 import com.nakedgardener.application.blog.domain.BlogPosts;
 import com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogPostsResult;
 import org.slf4j.Logger;
@@ -18,15 +18,15 @@ import static com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogP
 public class RecentBlogPostsService {
 
     private final RestTemplate restTemplate;
-    private final BlogURLFactory blogURLFactory;
+    private final BlogRestServiceURLFactory blogRestServiceURLFactory;
     private final RecentBlogPostsDTOConverter recentBlogPostsDTOConverter;
     private final Logger applicationErrorLog;
 
     @Autowired
-    public RecentBlogPostsService(RestTemplate restTemplate, BlogURLFactory blogURLFactory,
+    public RecentBlogPostsService(RestTemplate restTemplate, BlogRestServiceURLFactory blogRestServiceURLFactory,
                                   RecentBlogPostsDTOConverter recentBlogPostsDTOConverter, Logger applicationErrorLog) {
         this.restTemplate = restTemplate;
-        this.blogURLFactory = blogURLFactory;
+        this.blogRestServiceURLFactory = blogRestServiceURLFactory;
         this.recentBlogPostsDTOConverter = recentBlogPostsDTOConverter;
         this.applicationErrorLog = applicationErrorLog;
     }
@@ -45,6 +45,6 @@ public class RecentBlogPostsService {
     }
 
     private URI url(int fromIndex) {
-        return blogURLFactory.mostRecentBlogPostsURL(fromIndex);
+        return blogRestServiceURLFactory.mostRecentBlogPostsURL(fromIndex);
     }
 }
