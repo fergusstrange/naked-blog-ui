@@ -4,6 +4,7 @@ import com.nakedgardener.application.blog.domain.BlogPost;
 import com.nakedgardener.application.blog.domain.BlogPosts;
 import com.nakedgardener.application.blog.recentblogposts.dto.BlogPostPreview;
 import com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogPostsResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,13 @@ import static com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogP
 
 @Component
 public class RecentBlogPostsDTOConverter implements Converter<BlogPosts, RecentBlogPostsResult> {
+
+    private final BlogPostUrlFactory blogPostUrlFactory;
+
+    @Autowired
+    public RecentBlogPostsDTOConverter(BlogPostUrlFactory blogPostUrlFactory) {
+        this.blogPostUrlFactory = blogPostUrlFactory;
+    }
 
     @Override
     public RecentBlogPostsResult convert(BlogPosts blogPosts) {
@@ -29,6 +37,7 @@ public class RecentBlogPostsDTOConverter implements Converter<BlogPosts, RecentB
                 .postDate(blogPost.getPostDate())
                 .title(blogPost.getTitle())
                 .postSnippet(blogPost.getPost())
+                .blogPostSlugURL(blogPostUrlFactory.blogPostURL(blogPost.getBlogPostSlug()))
                 .build()
         ).collect(Collectors.toList());
     }

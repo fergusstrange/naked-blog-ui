@@ -1,7 +1,11 @@
 {{#partial "content"}}
-    <h2>Post Title</h2>
-    <div>
-        Post content.
-    </div>
+    {{#with blogPostResult}}
+        {{#unless postExists}}
+            {{postNotExistsMessage}}
+        {{else}}
+            <h3>{{title}}</h3>
+            <div>{{post}}</div>
+        {{/unless}}
+    {{/with}}
 {{/partial}}
 {{> base}}

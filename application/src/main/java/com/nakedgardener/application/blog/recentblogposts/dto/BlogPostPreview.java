@@ -7,11 +7,13 @@ public class BlogPostPreview {
     private final LocalDateTime postDate;
     private final String title;
     private final String postSnippet;
+    private final String blogPostSlugURL;
 
     private BlogPostPreview(BlogPostPreviewBuilder builder) {
         this.postDate = builder.postDate;
         this.title = builder.title;
         this.postSnippet = builder.postSnippet;
+        this.blogPostSlugURL = builder.blogPostSlugURL;
     }
 
     public static BlogPostPreviewBuilder blogPostPreviewBuilder() {
@@ -30,11 +32,16 @@ public class BlogPostPreview {
         return postSnippet;
     }
 
+    public String getBlogPostSlugURL() {
+        return blogPostSlugURL;
+    }
+
     public static class BlogPostPreviewBuilder {
 
         private LocalDateTime postDate;
         private String title;
         private String postSnippet;
+        private String blogPostSlugURL;
 
         public BlogPostPreviewBuilder postDate(LocalDateTime postDate) {
             this.postDate = postDate;
@@ -48,6 +55,11 @@ public class BlogPostPreview {
 
         public BlogPostPreviewBuilder postSnippet(String postSnippet) {
             this.postSnippet = postSnippet;
+            return this;
+        }
+
+        public BlogPostPreviewBuilder blogPostSlugURL(String blogPostSlugURL) {
+            this.blogPostSlugURL = blogPostSlugURL;
             return this;
         }
 

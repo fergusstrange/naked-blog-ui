@@ -5,14 +5,24 @@ import com.nakedgardener.application.blog.domain.BlogPosts;
 import com.nakedgardener.application.blog.recentblogposts.dto.BlogPostPreview;
 import com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogPostsResult;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static com.google.common.io.Resources.getResource;
 import static org.fest.assertions.Assertions.assertThat;
 
+@RunWith(MockitoJUnitRunner.class)
 public class RecentBlogPostsDTOConverterTest {
 
     private ObjectMapper objectMapper = new ObjectMapper();
-    private RecentBlogPostsDTOConverter recentBlogPostsDTOConverter = new RecentBlogPostsDTOConverter();
+
+    @Mock
+    private BlogPostUrlFactory blogPostUrlFactory;
+
+    @InjectMocks
+    private RecentBlogPostsDTOConverter recentBlogPostsDTOConverter;
 
     @Test
     public void shouldConvertBlogPostWithContent() throws Exception {

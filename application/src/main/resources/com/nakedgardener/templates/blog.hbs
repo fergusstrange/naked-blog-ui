@@ -5,10 +5,12 @@
             <div>{{recentBlogPostsResult.noResultsMessage}}</div>
         {{else}}
             {{#each recentBlogPostsResult.blogPostPreviews}}
-                <div class="blogPostPreview">
-                    <h3>{{title}}</h3>
-                    <div><p>{{postSnippet}}</p></div>
-                </div>
+                <a href="{{blogPostSlugURL}}">
+                    <div class="blogPostPreview">
+                        <h3>{{title}}</h3>
+                        <div><p>{{postSnippet}}</p></div>
+                    </div>
+                </a>
             {{/each}}
         {{/if}}
     </div>

@@ -32,7 +32,7 @@ public class BlogController {
         return "blog";
     }
 
-    @RequestMapping(method = GET, value = "/blog/{blogTitleSlug}")
+    @RequestMapping(method = GET, value = "/blog/{blogPostSlug}")
     public String blogBySlug(final ModelMap model, @PathVariable String blogPostSlug) {
         BlogPostResult blogPostResult = blogPostService.blogPostByBlogPostSlug(blogPostSlug);
         model.addAttribute("blogPostResult", blogPostResult);
