@@ -4,6 +4,10 @@ dependencies {
     compile project(':application')
 
     compile 'org.springframework.boot:spring-boot-starter-security:1.2.4.RELEASE'
+
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.easytesting:fest-assert:1.4'
+    testCompile 'org.mockito:mockito-all:1.10.19'
 }
 
 jar {
