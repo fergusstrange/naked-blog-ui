@@ -23,7 +23,7 @@ public class BasePageInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        modelAndView.addObject("pageTitle", "The Naked Gardener | Cameron Strange");
+        modelAndView.addObject("pageTitle", "The Naked Gardener | Cameron Strange - Providing professional gardening services in the villages around Saffron Walden.");
         modelAndView.addObject("pageYear", now().getValue());
         modelAndView.addObject("pageDescription", "Garden maintenance run by Cameron Strange around Saffron Walden, Thaxted and Great Bardfield. Services include hedge cutting, strimming and weeding.");
         modelAndView.addObject("pageTags", "Garden Maintenance Saffron Walden Thaxted Great Bardfield Finchingfield Cameron Strange Hedge Cutting Lawn Mowing Strimming Weeding Waste Clearance");
