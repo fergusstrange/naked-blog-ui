@@ -9,10 +9,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static com.nakedgardener.application.blog.blogpost.dto.BlogPostResult.blogPostResultBuilder;
-import static java.time.format.FormatStyle.SHORT;
+import static java.time.format.DateTimeFormatter.ofPattern;
 
 @Component
 public class BlogPostDTOConverter implements Converter<BlogPost, BlogPostResult> {
+
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = ofPattern("dd-MM-yyyy HH:mm");
 
     @Override
     public BlogPostResult convert(BlogPost blogPost) {
@@ -24,6 +26,6 @@ public class BlogPostDTOConverter implements Converter<BlogPost, BlogPostResult>
     }
 
     private String formattedPostDate(LocalDateTime postDate) {
-        return postDate.format(DateTimeFormatter.ofLocalizedDateTime(SHORT));
+        return postDate.format(DATE_TIME_FORMATTER);
     }
 }

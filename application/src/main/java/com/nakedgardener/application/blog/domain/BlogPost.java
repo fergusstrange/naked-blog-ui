@@ -2,9 +2,11 @@ package com.nakedgardener.application.blog.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
+@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BlogPost {
 
@@ -22,24 +24,4 @@ public class BlogPost {
 
     @JsonProperty
     private String blogPostSlug;
-
-    public String getId() {
-        return id;
-    }
-
-    public LocalDateTime getPostDate() {
-        return postDate;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getPost() {
-        return post;
-    }
-
-    public String getBlogPostSlug() {
-        return blogPostSlug;
-    }
 }
