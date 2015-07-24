@@ -3,7 +3,7 @@
         {{#unless postExists}}
             {{postNotExistsMessage}}
         {{else}}
-            <h3>{{title}}</h3>
+            <h3><span>{{title}}</span>&nbsp;<small>{{postDate}}</small></h3>
             <div>{{post}}</div>
         {{/unless}}
     {{/with}}
