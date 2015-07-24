@@ -17,7 +17,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 
-import static com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogPostsResult.blogPostsResultsBuilder;
 import static java.util.Arrays.asList;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -94,7 +93,7 @@ public class RecentBlogPostsServiceTest {
     }
 
     private RecentBlogPostsResult blogPostsResult() {
-        return blogPostsResultsBuilder()
+        return RecentBlogPostsResult.builder()
                 .blogPostPreviews(asList(emptyPreview(), emptyPreview(), emptyPreview()))
                 .build();
     }

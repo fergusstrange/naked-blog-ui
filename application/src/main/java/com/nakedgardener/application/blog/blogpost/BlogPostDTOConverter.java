@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static com.nakedgardener.application.blog.blogpost.dto.BlogPostResult.blogPostResultBuilder;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 @Component
@@ -18,7 +17,8 @@ public class BlogPostDTOConverter implements Converter<BlogPost, BlogPostResult>
 
     @Override
     public BlogPostResult convert(BlogPost blogPost) {
-        return blogPostResultBuilder()
+        return BlogPostResult.builder()
+                .postExists(true)
                 .postDate(formattedPostDate(blogPost.getPostDate()))
                 .title(blogPost.getTitle())
                 .post(blogPost.getPost())

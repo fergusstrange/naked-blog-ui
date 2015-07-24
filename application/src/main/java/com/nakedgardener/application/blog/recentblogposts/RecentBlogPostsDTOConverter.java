@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.nakedgardener.application.blog.recentblogposts.dto.BlogPostPreview.blogPostPreviewBuilder;
-import static com.nakedgardener.application.blog.recentblogposts.dto.RecentBlogPostsResult.blogPostsResultsBuilder;
 
 @Component
 public class RecentBlogPostsDTOConverter implements Converter<BlogPosts, RecentBlogPostsResult> {
@@ -26,7 +25,7 @@ public class RecentBlogPostsDTOConverter implements Converter<BlogPosts, RecentB
 
     @Override
     public RecentBlogPostsResult convert(BlogPosts blogPosts) {
-        return blogPostsResultsBuilder()
+        return RecentBlogPostsResult.builder()
                 .blogPostPreviews(blogPostPreviews(blogPosts.getBlogPosts()))
                 .build();
     }

@@ -85,7 +85,8 @@ public class BlogPostServiceTest {
     }
 
     private BlogPostResult aBlogPost() {
-        return BlogPostResult.blogPostResultBuilder()
+        return BlogPostResult.builder()
+                .postExists(true)
                 .title("Title")
                 .post("Some post content")
                 .build();
