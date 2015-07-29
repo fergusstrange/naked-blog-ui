@@ -24,9 +24,10 @@ public class BasePageInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         modelAndView.getModelMap().computeIfAbsent("pageTitle", value -> "The Naked Gardener | Cameron Strange - Providing professional gardening services in the villages around Saffron Walden.");
-        modelAndView.addObject("pageYear", now().getValue());
         modelAndView.getModelMap().computeIfAbsent("pageDescription", value -> "Garden maintenance run by Cameron Strange around Saffron Walden, Thaxted and Great Bardfield. Services include hedge cutting, strimming and weeding.");
         modelAndView.getModel().computeIfAbsent("pageTags", value -> "Garden Maintenance Saffron Walden Thaxted Great Bardfield Finchingfield Cameron Strange Hedge Cutting Lawn Mowing Strimming Weeding Waste Clearance");
+
+        modelAndView.addObject("pageYear", now().getValue());
         modelAndView.addObject("navigationItems", navigationItemFactory.create(request.getRequestURI()));
     }
 }
