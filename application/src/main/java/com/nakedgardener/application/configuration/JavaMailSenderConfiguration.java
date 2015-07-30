@@ -9,10 +9,10 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @Configuration
 public class JavaMailSenderConfiguration {
 
-    @Value("${mail.host}")
+    @Value("${mail.host:localhost}")
     private String mailHost;
 
-    @Value("${mail.host.port}")
+    @Value("${mail.host.port:25}")
     private Integer mailHostPort;
 
     @Bean

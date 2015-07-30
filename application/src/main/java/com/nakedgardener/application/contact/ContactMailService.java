@@ -14,7 +14,7 @@ import static javax.mail.Message.RecipientType.TO;
 @Component
 public class ContactMailService {
 
-    @Value("${email.to.address}")
+    @Value("${email.to.address:contact@thenakedgardener.co.uk}")
     private String emailToAddress;
 
     private final JavaMailSender mailSender;
