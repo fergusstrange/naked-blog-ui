@@ -1,6 +1,6 @@
 rootProject.name = 'naked-gardener'
 
 include 'application'
-include 'integration-test'
 include 'web'
-
+include 'integration-test'
+include 'cdc-test'
