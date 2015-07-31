@@ -48,15 +48,15 @@ public class RecentBlogPostsCDCTest {
                 .toFragment();
     }
 
-    private String blogPostRestResponseBody() throws IOException {
-        return Resources.toString(getResource("com/nakedgardener/application/blog/blog-posts_rest_response.json"), defaultCharset());
-    }
-
     @Test
     @PactVerification("test")
     public void runTest() {
         RecentBlogPostsResult recentBlogPostsResult = recentBlogPostsService.blogPostsByIndex(0);
 
         assertThat(recentBlogPostsResult.isNoResults()).isFalse();
+    }
+
+    private String blogPostRestResponseBody() throws IOException {
+        return Resources.toString(getResource("com/nakedgardener/application/blog/blog-posts_rest_response.json"), defaultCharset());
     }
 }
