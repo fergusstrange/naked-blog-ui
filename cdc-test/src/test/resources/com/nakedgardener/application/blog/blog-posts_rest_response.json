@@ -12,58 +12,6 @@
       "blogPostSlug": "slugy-slug-slug",
       "title": "A Test Blog",
       "post": "Some content in the blog!"
-    },
-    {
-      "id": "55ae7664936d190f5152873e",
-      "postDate": [
-        2014,
-        2,
-        2,
-        1,
-        8
-      ],
-      "blogPostSlug": "slugmans",
-      "title": "A TeBlog",
-      "post": "So the blog!"
-    },
-    {
-      "id": "55ae766b936d190f5152873f",
-      "postDate": [
-        2014,
-        2,
-        2,
-        1,
-        7
-      ],
-      "blogPostSlug": "slugmans",
-      "title": "A TeBlog",
-      "post": "So the blog!"
-    },
-    {
-      "id": "55ae7671936d190f51528740",
-      "postDate": [
-        2014,
-        2,
-        2,
-        1,
-        4
-      ],
-      "blogPostSlug": "slugmans",
-      "title": "A TeBlog",
-      "post": "So the blog!"
-    },
-    {
-      "id": "55ae767a936d190f51528741",
-      "postDate": [
-        2014,
-        2,
-        2,
-        1,
-        3
-      ],
-      "blogPostSlug": "slugmans",
-      "title": "A TeBlog",
-      "post": "So the blog!"
     }
   ]
 }
