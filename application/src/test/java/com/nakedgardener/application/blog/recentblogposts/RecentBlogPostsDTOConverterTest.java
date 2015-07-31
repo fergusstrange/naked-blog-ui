@@ -36,6 +36,14 @@ public class RecentBlogPostsDTOConverterTest {
         assertThat(blogPostPreview.getPostSnippet()).isEqualTo("Some content in the blog!");
     }
 
+    @Test
+    public void shouldHandleNullBlogPostAndReturnEmtpyResult() throws Exception {
+        RecentBlogPostsResult recentBlogPostsResult = recentBlogPostsDTOConverter.convert(null);
+
+        assertThat(recentBlogPostsResult).isNotNull();
+        assertThat(recentBlogPostsResult.isNoResults()).isTrue();
+    }
+
     private BlogPosts blogPosts() throws Exception {
         objectMapper.findAndRegisterModules();
         return objectMapper.readValue(getResource("com/nakedgardener/application/blog/blog-posts_rest_response.json"), BlogPosts.class);

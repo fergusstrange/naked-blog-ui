@@ -1,0 +1,7 @@
+dependencies {
+    compile project(':application')
+    compile project(path: ':integration-test-common', configuration: 'tests')
+
+    testCompile 'au.com.dius:pact-jvm-consumer-junit_2.11:2.2.10'
+    testCompile 'com.google.guava:guava:18.0'
+}
