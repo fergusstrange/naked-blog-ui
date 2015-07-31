@@ -1,7 +1,7 @@
 dependencies {
-    compile project(':application')
-    compile project(path: ':integration-test-common', configuration: 'tests')
-
+    testCompile project(':application')
+    testCompile 'org.easytesting:fest-assert:1.4'
+    testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
     testCompile 'au.com.dius:pact-jvm-consumer-junit_2.11:2.2.10'
     testCompile 'com.google.guava:guava:18.0'
 }
