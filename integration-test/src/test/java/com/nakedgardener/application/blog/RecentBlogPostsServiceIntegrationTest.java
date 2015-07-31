@@ -42,6 +42,7 @@ public class RecentBlogPostsServiceIntegrationTest {
         RecentBlogPostsResult blogPosts = recentBlogPostsService.blogPostsByIndex(0);
 
         assertThat(blogPosts).isNotNull();
+        assertThat(blogPosts.isNoResults()).isFalse();
         assertThat(blogPosts.getBlogPostPreviews()).hasSize(5);
     }
 
