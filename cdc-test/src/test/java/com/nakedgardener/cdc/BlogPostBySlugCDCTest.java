@@ -34,7 +34,7 @@ public class BlogPostBySlugCDCTest {
     @Autowired
     private BlogPostService blogPostService;
 
-    @Pact(state="test", provider="naked-blog", consumer="naked-gardener")
+    @Pact(state="blog-post-by-slug", provider="naked-blog", consumer="naked-gardener")
     public PactFragment createFragment(ConsumerPactBuilder.PactDslWithProvider.PactDslWithState builder) throws Exception {
         return builder
                 .uponReceiving("RecentBlogPostsCDCTest test interaction")
@@ -48,7 +48,7 @@ public class BlogPostBySlugCDCTest {
     }
 
     @Test
-    @PactVerification("test")
+    @PactVerification("blog-post-by-slug")
     public void runTest() {
         BlogPostResult blogPostResult = blogPostService.blogPostByBlogPostSlug("la-la-la");
 
