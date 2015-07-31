@@ -1,7 +1,5 @@
 dependencies {
-    compile project(':application')
-
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile project(':application')
     testCompile 'org.easytesting:fest-assert:1.4'
     testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
     testCompile 'com.icegreen:greenmail:1.4.1'
