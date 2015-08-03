@@ -1,7 +1,21 @@
+plugins {
+    id "au.com.dius.pact" version "2.2.10"
+}
+
 dependencies {
     testCompile project(':application')
     testCompile 'org.easytesting:fest-assert:1.4'
     testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
     testCompile 'au.com.dius:pact-jvm-consumer-junit_2.11:2.2.10'
     testCompile 'com.google.guava:guava:18.0'
+}
+
+test {
+    systemProperties['pact.rootDir'] = "$buildDir/pacts"
+}
+
+pact {
+    publish {
+        pactBrokerUrl = 'http://pact-broker:5555'
+    }
 }
