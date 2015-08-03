@@ -5,7 +5,6 @@ import au.com.dius.pact.consumer.Pact;
 import au.com.dius.pact.consumer.PactRule;
 import au.com.dius.pact.consumer.PactVerification;
 import au.com.dius.pact.model.PactFragment;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.io.Resources;
 import com.nakedgardener.application.blog.blogpost.BlogPostService;
 import com.nakedgardener.application.blog.blogpost.dto.BlogPostResult;
@@ -21,8 +20,6 @@ import java.io.IOException;
 import static com.google.common.io.Resources.getResource;
 import static java.nio.charset.Charset.defaultCharset;
 import static org.fest.assertions.Assertions.assertThat;
-import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = CDCTest.class)
@@ -37,12 +34,12 @@ public class BlogPostBySlugCDCTest {
     @Pact(state="blog-post-by-slug", provider="naked-blog", consumer="naked-gardener")
     public PactFragment createFragment(ConsumerPactBuilder.PactDslWithProvider.PactDslWithState builder) throws Exception {
         return builder
-                .uponReceiving("RecentBlogPostsCDCTest test interaction")
-                .path("/blog-post/_blogPostSlug/la-la-la")
+                .uponReceiving("BlogPostBySlugCDCTest test interaction")
+                .matchPath("/blog-post/_blogPostSlug/.+")
                 .method("GET")
                 .willRespondWith()
                 .status(200)
-                .headers(ImmutableMap.of(CONTENT_TYPE, APPLICATION_JSON_VALUE))
+                .matchHeader("Content-Type", "application/json;charset=UTF-8")
                 .body(blogPostRestResponseBody())
                 .toFragment();
     }
