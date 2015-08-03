@@ -1,21 +1,26 @@
 package com.nakedgardener.application.blog.blogpost;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nakedgardener.application.blog.blogpost.dto.BlogPostResult;
 import com.nakedgardener.application.blog.domain.BlogPost;
 import org.junit.Test;
 
-import static com.google.common.io.Resources.getResource;
+import java.time.LocalDateTime;
+
 import static org.fest.assertions.Assertions.assertThat;
 
 public class BlogPostDTOConverterTest {
 
     private BlogPostDTOConverter blogPostDTOConverter = new BlogPostDTOConverter();
-    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
     public void shouldConvertBlogPostToBlogPostResult() throws Exception {
-        BlogPostResult blogPostResult = blogPostDTOConverter.convert(blogPost());
+        BlogPostResult blogPostResult = blogPostDTOConverter.convert(
+                BlogPost.builder()
+                .title("A Test Blog")
+                .post("Some content in the blog!")
+                .postDate(LocalDateTime.of(2014, 2, 2, 15, 9))
+                .build()
+        );
 
         assertThat(blogPostResult).isNotNull();
         assertThat(blogPostResult.getTitle()).isEqualTo("A Test Blog");
@@ -24,8 +29,14 @@ public class BlogPostDTOConverterTest {
         assertThat(blogPostResult.isPostExists()).isTrue();
     }
 
-    private BlogPost blogPost() throws Exception {
-        objectMapper.findAndRegisterModules();
-        return objectMapper.readValue(getResource("com/nakedgardener/application/blog/blog-post_rest_response.json"), BlogPost.class);
+    @Test
+    public void shouldConvertNullDateToNull() throws Exception {
+        BlogPostResult blogPostResult = blogPostDTOConverter.convert(BlogPost.builder()
+                .postDate(null)
+                .post("rubbish text.")
+                .blogPostSlug("dad-dasd-das-d23d3")
+                .build());
+
+        assertThat(blogPostResult.getPostDate()).isNull();
     }
 }

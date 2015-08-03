@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
+import static java.util.Objects.nonNull;
 
 @Component
 public class BlogPostDTOConverter implements Converter<BlogPost, BlogPostResult> {
@@ -26,6 +27,9 @@ public class BlogPostDTOConverter implements Converter<BlogPost, BlogPostResult>
     }
 
     private String formattedPostDate(LocalDateTime postDate) {
-        return postDate.format(DATE_TIME_FORMATTER);
+
+        return nonNull(postDate) ?
+                postDate.format(DATE_TIME_FORMATTER) :
+                null;
     }
 }
