@@ -5,9 +5,10 @@ import au.com.dius.pact.consumer.Pact;
 import au.com.dius.pact.consumer.PactRule;
 import au.com.dius.pact.consumer.PactVerification;
 import au.com.dius.pact.model.PactFragment;
-import com.google.common.io.Resources;
 import com.nakedgardener.application.blog.blogpost.BlogPostService;
 import com.nakedgardener.application.blog.blogpost.dto.BlogPostResult;
+import com.nakedgardener.application.blog.domain.BlogPost;
+import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,10 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.io.IOException;
-
-import static com.google.common.io.Resources.getResource;
-import static java.nio.charset.Charset.defaultCharset;
 import static org.fest.assertions.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,28 +28,30 @@ public class BlogPostBySlugCDCTest {
     @Autowired
     private BlogPostService blogPostService;
 
-    @Pact(state="blog-post-by-slug", provider="naked-blog", consumer="naked-gardener")
+    @Pact(state = "A blog post with slug la-la-la", provider = "naked-blog", consumer = "naked-gardener")
     public PactFragment createFragment(ConsumerPactBuilder.PactDslWithProvider.PactDslWithState builder) throws Exception {
         return builder
-                .uponReceiving("BlogPostBySlugCDCTest test interaction")
-                .matchPath("/blog-post/_blogPostSlug/.+")
+                .uponReceiving("a request for a blog post with slug la-la-la")
+                .matchPath("/blog-post/_blogPostSlug/la-la-la")
                 .method("GET")
                 .willRespondWith()
                 .status(200)
-                .matchHeader("Content-Type", "application/json;charset=UTF-8")
-                .body(blogPostRestResponseBody())
+                .body(body())
                 .toFragment();
     }
 
     @Test
-    @PactVerification("blog-post-by-slug")
+    @PactVerification("A blog post with slug la-la-la")
     public void runTest() {
         BlogPostResult blogPostResult = blogPostService.blogPostByBlogPostSlug("la-la-la");
 
         assertThat(blogPostResult.isPostExists()).isTrue();
     }
 
-    private String blogPostRestResponseBody() throws IOException {
-        return Resources.toString(getResource("com/nakedgardener/application/blog/blog-post_by_slug_rest_response.json"), defaultCharset());
+    private JSONObject body() {
+        BlogPost blogPost = BlogPost.builder()
+                .blogPostSlug("la-la-la")
+                .build();
+        return new JSONObject(blogPost);
     }
 }
