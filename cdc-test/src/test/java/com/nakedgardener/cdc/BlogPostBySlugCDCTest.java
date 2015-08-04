@@ -30,7 +30,7 @@ public class BlogPostBySlugCDCTest {
     private BlogPostService blogPostService;
 
     @Pact(state = "A blog post with slug la-la-la", provider = "naked-blog", consumer = "naked-gardener")
-    public PactFragment createFragment(ConsumerPactBuilder.PactDslWithProvider.PactDslWithState builder) throws Exception {
+    public PactFragment anExistingBlogPost(ConsumerPactBuilder.PactDslWithProvider.PactDslWithState builder) throws Exception {
         return builder
                 .uponReceiving("a request for a blog post with slug la-la-la")
                 .matchPath("/blog-post/_blogPostSlug/la-la-la")
@@ -44,10 +44,50 @@ public class BlogPostBySlugCDCTest {
 
     @Test
     @PactVerification("A blog post with slug la-la-la")
-    public void runTest() {
+    public void shouldReturnBlogPostThatExistsWithSlug() {
         BlogPostResult blogPostResult = blogPostService.blogPostByBlogPostSlug("la-la-la");
 
         assertThat(blogPostResult.isPostExists()).isTrue();
+    }
+
+    @Pact(state = "A blog post that doesn't exist", provider = "naked-blog", consumer = "naked-gardener")
+    public PactFragment aNonExistentBlogPost(ConsumerPactBuilder.PactDslWithProvider.PactDslWithState builder) throws Exception {
+        return builder
+                .uponReceiving("a request for a blog post that doesn't exist")
+                .matchPath("/blog-post/_blogPostSlug/does-not-exist")
+                .method("GET")
+                .willRespondWith()
+                .status(404)
+                .matchHeader(CONTENT_TYPE, "application/json")
+                .toFragment();
+    }
+
+    @Test
+    @PactVerification("A blog post that doesn't exist")
+    public void shouldReturn404() throws Exception {
+        BlogPostResult blogPostResult = blogPostService.blogPostByBlogPostSlug("does-not-exist");
+
+        assertThat(blogPostResult.isPostExists()).isFalse();
+    }
+
+    @Pact(state = "An error occured within the server", provider = "naked-blog", consumer = "naked-gardener")
+    public PactFragment anErrorHasOccuredWithinTheServer(ConsumerPactBuilder.PactDslWithProvider.PactDslWithState builder) throws Exception {
+        return builder
+                .uponReceiving("a request for a blog post that doesn't exist")
+                .matchPath("/blog-post/_blogPostSlug/make-an-error")
+                .method("GET")
+                .willRespondWith()
+                .status(500)
+                .matchHeader(CONTENT_TYPE, "application/json")
+                .toFragment();
+    }
+
+    @Test
+    @PactVerification("An error occured within the server")
+    public void shouldReturn500() throws Exception {
+        BlogPostResult blogPostResult = blogPostService.blogPostByBlogPostSlug("make-an-error");
+
+        assertThat(blogPostResult.isPostExists()).isFalse();
     }
 
     private JSONObject body() {
