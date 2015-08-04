@@ -17,6 +17,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = CDCTest.class)
@@ -36,6 +37,7 @@ public class BlogPostBySlugCDCTest {
                 .method("GET")
                 .willRespondWith()
                 .status(200)
+                .matchHeader(CONTENT_TYPE, "application/json")
                 .body(body())
                 .toFragment();
     }
