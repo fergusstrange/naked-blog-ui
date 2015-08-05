@@ -37,7 +37,7 @@ public class BlogPostBySlugCDCTest {
                 .method("GET")
                 .willRespondWith()
                 .status(200)
-                .matchHeader(CONTENT_TYPE, "application/json")
+                .matchHeader(CONTENT_TYPE, "application/json;charset=UTF-8")
                 .body(body())
                 .toFragment();
     }
@@ -58,7 +58,7 @@ public class BlogPostBySlugCDCTest {
                 .method("GET")
                 .willRespondWith()
                 .status(404)
-                .matchHeader(CONTENT_TYPE, "application/json")
+                .matchHeader(CONTENT_TYPE, "application/json;charset=UTF-8")
                 .toFragment();
     }
 
@@ -78,7 +78,7 @@ public class BlogPostBySlugCDCTest {
                 .method("GET")
                 .willRespondWith()
                 .status(500)
-                .matchHeader(CONTENT_TYPE, "application/json")
+                .matchHeader(CONTENT_TYPE, "application/json;charset=UTF-8")
                 .toFragment();
     }
 
