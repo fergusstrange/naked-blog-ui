@@ -40,7 +40,7 @@ public class RecentBlogPostCDCTest {
                 .method("GET")
                 .willRespondWith()
                 .status(200)
-                .matchHeader(CONTENT_TYPE, "application/json")
+                .matchHeader(CONTENT_TYPE, "application/json;charset=UTF-8")
                 .body(body())
                 .toFragment();
     }
