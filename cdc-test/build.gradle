@@ -16,6 +16,6 @@ test {
 
 pact {
     publish {
-        pactBrokerUrl = 'http://lianli:5555'
+        pactBrokerUrl = 'http://localhost:5555'
     }
 }
