@@ -1,14 +1,9 @@
 package com.nakedgardener.cdc;
 
-import au.com.dius.pact.consumer.ConsumerPactBuilder;
-import au.com.dius.pact.consumer.Pact;
-import au.com.dius.pact.consumer.PactRule;
-import au.com.dius.pact.consumer.PactVerification;
+import au.com.dius.pact.consumer.*;
 import au.com.dius.pact.model.PactFragment;
 import com.nakedgardener.application.blog.blogpost.BlogPostService;
 import com.nakedgardener.application.blog.blogpost.dto.BlogPostResult;
-import com.nakedgardener.application.blog.domain.BlogPost;
-import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -70,8 +65,8 @@ public class BlogPostBySlugCDCTest {
         assertThat(blogPostResult.isPostExists()).isFalse();
     }
 
-    @Pact(state = "An error occured within the server", provider = "naked-blog", consumer = "naked-gardener")
-    public PactFragment anErrorHasOccuredWithinTheServer(ConsumerPactBuilder.PactDslWithProvider.PactDslWithState builder) throws Exception {
+    @Pact(state = "An error occurred within the server", provider = "naked-blog", consumer = "naked-gardener")
+    public PactFragment anErrorHasOccurredWithinTheServer(ConsumerPactBuilder.PactDslWithProvider.PactDslWithState builder) throws Exception {
         return builder
                 .uponReceiving("a request for a blog post that doesn't exist")
                 .matchPath("/blog-post/_blogPostSlug/make-an-error")
@@ -83,17 +78,19 @@ public class BlogPostBySlugCDCTest {
     }
 
     @Test
-    @PactVerification("An error occured within the server")
+    @PactVerification("An error occurred within the server")
     public void shouldReturn500() throws Exception {
         BlogPostResult blogPostResult = blogPostService.blogPostByBlogPostSlug("make-an-error");
 
         assertThat(blogPostResult.isPostExists()).isFalse();
     }
 
-    private JSONObject body() {
-        BlogPost blogPost = BlogPost.builder()
-                .blogPostSlug("la-la-la")
-                .build();
-        return new JSONObject(blogPost);
+    private DslPart body() {
+        return new PactDslJsonBody()
+                .id()
+                .date("postDate", "yyyy-MM-dd'T'HH:mm:ss.SSS")
+                .stringType("title")
+                .stringType("post")
+                .stringType("blogPostSlug");
     }
 }
