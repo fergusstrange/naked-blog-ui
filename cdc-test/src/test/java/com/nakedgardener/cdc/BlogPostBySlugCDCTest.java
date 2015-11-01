@@ -87,7 +87,7 @@ public class BlogPostBySlugCDCTest {
 
     private DslPart body() {
         return new PactDslJsonBody()
-                .id()
+                .stringType("id")
                 .date("postDate", "yyyy-MM-dd'T'HH:mm:ss.SSS")
                 .stringType("title")
                 .stringType("post")
