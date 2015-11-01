@@ -24,7 +24,7 @@ public class BlogPostBySlugCDCTest {
     @Autowired
     private BlogPostService blogPostService;
 
-    @Pact(state = "A blog post with slug la-la-la", provider = "naked-blog", consumer = "naked-gardener")
+    @Pact(state = "A blog post with slug la-la-la", provider = "naked-blog", consumer = "naked-blog-ui")
     public PactFragment anExistingBlogPost(ConsumerPactBuilder.PactDslWithProvider.PactDslWithState builder) throws Exception {
         return builder
                 .uponReceiving("a request for a blog post with slug la-la-la")
@@ -45,7 +45,7 @@ public class BlogPostBySlugCDCTest {
         assertThat(blogPostResult.isPostExists()).isTrue();
     }
 
-    @Pact(state = "A blog post that doesn't exist", provider = "naked-blog", consumer = "naked-gardener")
+    @Pact(state = "A blog post that doesn't exist", provider = "naked-blog", consumer = "naked-blog-ui")
     public PactFragment aNonExistentBlogPost(ConsumerPactBuilder.PactDslWithProvider.PactDslWithState builder) throws Exception {
         return builder
                 .uponReceiving("a request for a blog post that doesn't exist")
@@ -65,7 +65,7 @@ public class BlogPostBySlugCDCTest {
         assertThat(blogPostResult.isPostExists()).isFalse();
     }
 
-    @Pact(state = "An error occurred within the server", provider = "naked-blog", consumer = "naked-gardener")
+    @Pact(state = "An error occurred within the server", provider = "naked-blog", consumer = "naked-blog-ui")
     public PactFragment anErrorHasOccurredWithinTheServer(ConsumerPactBuilder.PactDslWithProvider.PactDslWithState builder) throws Exception {
         return builder
                 .uponReceiving("a request for a blog post that doesn't exist")

@@ -1,4 +1,4 @@
-rootProject.name = 'naked-gardener'
+rootProject.name = 'naked-blog-ui'
 
 include 'application'
 include 'web'

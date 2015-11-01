@@ -11,7 +11,7 @@ dependencies {
 }
 
 jar {
-    baseName = 'naked-gardener'
+    baseName = 'naked-blog-ui'
     version = null
 }
 
