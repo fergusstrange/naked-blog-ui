@@ -90,6 +90,7 @@ public class BlogPostBySlugCDCTest {
                 .stringType("id")
                 .date("postDate", "yyyy-MM-dd'T'HH:mm:ss.SSS")
                 .stringType("title")
+                .stringType("nana")
                 .stringType("post")
                 .stringType("blogPostSlug");
     }
