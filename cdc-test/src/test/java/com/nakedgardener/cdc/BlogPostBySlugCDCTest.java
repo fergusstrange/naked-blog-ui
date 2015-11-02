@@ -91,6 +91,7 @@ public class BlogPostBySlugCDCTest {
                 .date("postDate", "yyyy-MM-dd'T'HH:mm:ss.SSS")
                 .stringType("title")
                 .stringType("nana")
+                .numberType("nirmalsBirthday")
                 .stringType("post")
                 .stringType("blogPostSlug");
     }
