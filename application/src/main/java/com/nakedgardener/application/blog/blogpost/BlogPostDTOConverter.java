@@ -14,7 +14,7 @@ import static java.util.Objects.nonNull;
 @Component
 public class BlogPostDTOConverter implements Converter<BlogPost, BlogPostResult> {
 
-    public static final DateTimeFormatter DATE_TIME_FORMATTER = ofPattern("dd-MM-yyyy HH:mm");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = ofPattern("dd-MM-yyyy HH:mm");
 
     @Override
     public BlogPostResult convert(BlogPost blogPost) {
